@@ -32,10 +32,14 @@ class controller {
     }
 
     public function GetModelInstance($model) {
-        if (class_exists($model, true)) {
-            return new $model();
+        if (!empty($model)) {
+            if (class_exists($model, true)) {
+                return new $model();
+            } else {
+                return new error_404($model);
+            }
         } else {
-            return false;
+            return new index();
         }
     }
 
