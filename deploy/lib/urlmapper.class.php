@@ -9,26 +9,28 @@ class urlmapper {
     public static function AllSegmentsFromRequestURI() {
         global $app_config;
         $fullrequest = urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-        $fullwebpath = urlmapper::ProtocolType() . $app_config['web_path'].'/';
+        $fullwebpath = urlmapper::ProtocolType() . $app_config['web_path'] . '/';
         $clean = str_replace($fullwebpath, '', $fullrequest);
         $values = explode("/", $clean);
         return $values;
     }
-    
+
     /**
      * Returns the requested controller.
      * @return string The named controller. 
      */
-    public static function ControllerRequestFromRequestURI(){
+    public static function ControllerRequestFromRequestURI() {
         $allmappings = self::AllSegmentsFromRequestURI();
-        return $allmappings[1];
+        if (!empty($allmappings[1]))
+            return $allmappings[1];
+        return false;
     }
-    
+
     /**
      * Returns all model requests. 
      * @ return array All other requests.
      */
-    public static function ModelRequestsFromRequestURI(){
+    public static function ModelRequestsFromRequestURI() {
         return array_slice(self::AllSegmentsFromRequestURI(), 2);
     }
 

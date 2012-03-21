@@ -1,6 +1,6 @@
 <?php
 
-class Controller {
+class controller {
 
     /**
      * Stores the current controller request.
