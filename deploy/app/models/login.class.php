@@ -2,24 +2,25 @@
 
 class login extends controller {
     
-    static $renderwith = 'login.phtml';
+    var $renderwith = 'login.html';
 
     function __construct() {
         parent::__construct();
-        echo "It worked!<br>";
-        echo "The controller request was: ".$this->controller_request;
     }
     
-    function getDoesItWork(){
-        return true;
+    public function WelcomeBlock(){
+        return "Welcome to this test site, thanks for visiting!";
+    }
+    public function WelcomeBlock3(){
+        return "Hi there, my name is boddty";
     }
     
-    function getExampleOutput(){
-        return "some output here, this should be echo'd";
+    public function SomeHTML(){
+        return "<h1>" .$this->WelcomeBlock(). "</h1>";
     }
     
-    function doExampleOutput(){
-        return "some output here, this should be echo'd";
+    public function CheckThis(){
+        return "something here";
     }
 
 }

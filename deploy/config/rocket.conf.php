@@ -12,4 +12,5 @@ $app_config['web_path'] = $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME'
 $app_config['class_folders'] = array('lib', 'app/models'); // Folders which should autoload classes from.
 $app_config['temp_directory'] = "tmp/"; // The default temporary folder (Where temporary files will be stored by the framework).
 $app_config['default_time_format'] = "d/m/Y"; // The default PHP date() format to use when a format isn't specified in the static function time::FormatTimestamp().
+$app_config['default_log_file'] = "log/application.log.txt"; // The default log file that the application will write too if one is not specified.
 ?>

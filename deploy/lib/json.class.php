@@ -1,6 +1,6 @@
 <?php
 
-class jsonwebservice {
+class json {
 
     /**
      * Converts a JSON string to a PHP array.

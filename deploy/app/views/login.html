@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= WelcomeBlock %></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div><%= WelcomeBlock %></div>
+        Some static stuff
+        <%= SomeHTML %>
+        <?php echo "Lets try and execute some nasty PHP ;)"; ?>
+        <%= WelcomeBlock %>
+        <%= WelcomeBlock3 %>
+
+        <% if CheckThis %>
+        Hello, I returned true ;)
+        <% else %>
+        Nope, sorry the computer says no!
+        <% end %>
+    </body>
+</html>

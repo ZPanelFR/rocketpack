@@ -8,9 +8,12 @@ class http {
      * @return mixed  
      */
     public function ReadDataFromURL($url) {
-        if (@file_get_contents($url))
+        if (@file_get_contents($url)) {
             return file_get_contents($url);
-        return false;
+        } else {
+            logger::LogToFile("[http::ReadDataFromURL] Unable to read from URL: " . $url . "");
+            return false;
+        }
     }
 
     /**
@@ -25,19 +28,21 @@ class http {
                 'method' => 'POST',
                 'content' => $data
                 ));
-        if ($optional_headers !== null) {
+        if ($optional_headers != null) {
             $params['http']['header'] = $optional_headers;
         }
         $ctx = stream_context_create($params);
         $fp = @fopen($url, 'rb', false, $ctx);
         if (!$fp) {
-            die("Problem reading data from " . $url . "");
+            logger::LogToFile("[http::SendPostRequest] Problem reading data from " . $url . "");
         }
         $response = @stream_get_contents($fp);
         if ($response == false) {
-            die("Problem reading data from " . $url . "");
+            logger::LogToFile("Problem reading data from " . $url . "");
         }
         return $response;
     }
+
+}
 
 ?>

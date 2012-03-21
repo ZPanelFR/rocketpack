@@ -3,6 +3,15 @@
 class urlmapper {
 
     /**
+     * Returns the current full web path to the applicaiton init script..
+     * @return type 
+     */
+    public static function GetFullWebPath() {
+        global $app_config;
+        return urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'] . "/";
+    }
+
+    /**
      * Returns an array of all the request parameters.
      * @return array Array of all the request paths/parameters.
      */
