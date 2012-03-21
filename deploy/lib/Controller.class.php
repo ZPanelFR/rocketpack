@@ -25,13 +25,10 @@ class Controller {
     var $getvars;
 
     function __construct() {
-        $this->postvars = $_POST;
-        $this->getvars = $_GET;
-    }
-
-    public function GetMainRequest() {
         $this->controller_request = urlmapper::ControllerRequestFromRequestURI();
         $this->sub_requests = urlmapper::ModelRequestsFromRequestURI();
+        $this->postvars = $_POST;
+        $this->getvars = $_GET;
     }
 
     public function GetModelInstance($model) {
