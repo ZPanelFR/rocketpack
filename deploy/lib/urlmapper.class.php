@@ -58,7 +58,7 @@ class urlmapper {
      */
     public static function OutputAllCSSLinks() {
         global $app_config;
-        $allfiles = filesystem::RetrieveAllFilesFromDirectory($app_config['system_path'] . "/app/assets/stylesheets/");
+        $allfiles = filesystem::RetrieveAllFilesFromDirectory($app_config['system_path'] . "/app/assets/stylesheets/", "css");
         $retval = array();
         foreach ($allfiles as $cssfile) {
             $line = "\n\r" . str_replace($app_config['system_path'], "", $cssfile);
@@ -71,7 +71,14 @@ class urlmapper {
      * Returns and links all Javascript files found in: app/assets/javascripts/ 
      */
     public static function OutputAllJavascriptLinks() {
-        
+        global $app_config;
+        $allfiles = filesystem::RetrieveAllFilesFromDirectory($app_config['system_path'] . "/app/assets/javascript/", "js");
+        $retval = array();
+        foreach ($allfiles as $jsfile) {
+            $line = "\n\r" . str_replace($app_config['system_path'], "", $jsfile);
+            array_push($retval, array("file" => $line));
+        }
+        return $retval;
     }
 
 }
