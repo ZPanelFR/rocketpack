@@ -5,11 +5,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
+        <% include form %>
         <div><%= WelcomeToRocketPack %></div>
         Welcome to RocketPack!
         
         <% control Names %>
         * <%@ firstname %> <%@ lastname %><br>
         <% end %>
+        
+        <pre><%= ShowFooter %></pre>
+        
     </body>
 </html>
