@@ -19,5 +19,5 @@ function __autoload($class_name) {
  * Lets load the controller and boot the application. 
  */
 $controller = new Controller;
-$controller->GetModelInstance($controller->controller_request);
+$controller->GetControllerInstance($controller->controller_request);
 ?>

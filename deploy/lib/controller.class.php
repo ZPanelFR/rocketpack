@@ -25,9 +25,16 @@ class controller {
     var $getvars;
 
     /**
+     * Stores application settings. 
+     */
+    var $settings;
+
+    /**
      * Constructs the Controller class and grabs all the request types. 
      */
     function __construct() {
+        global $app_config;
+        $this->settings = $app_config;
         $this->controller_request = urlmapper::ControllerRequestFromRequestURI();
         $this->sub_requests = urlmapper::ModelRequestsFromRequestURI();
         $this->postvars = $_POST;
@@ -39,15 +46,15 @@ class controller {
      * @param type $model
      * @return \model 
      */
-    public function GetModelInstance($model) {
+    public function GetControllerInstance($model) {
         if (!$model == "") {
             if (class_exists($model, true)) {
                 return new $model;
             } else {
-                director::Redirect(urlmapper::GetFullWebPath() . "error");
+                director::Redirect(urlmapper::GetFullWebPath() . $this->settings['no_controller_error']);
             }
         } else {
-            director::Redirect(urlmapper::GetFullWebPath() . "main");
+            director::Redirect(urlmapper::GetFullWebPath() . $this->settings['main_controller']);
         }
     }
 
