@@ -19,13 +19,15 @@ class main extends controller {
     public function ShowFooter() {
         // From the 'model' folder. - Shared across all controller!
         $footer_instance = new footerrandom();
-        
+
         // You can also call static functions too...
         //return footerrandom::StaticFooter();
-        
+
         return $footer_instance->ShowMe();
-        
-        
+    }
+
+    public function ShowCSSFiles() {
+        return urlmapper::OutputAllCSSLinks();
     }
 
 }

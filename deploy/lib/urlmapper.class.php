@@ -53,6 +53,27 @@ class urlmapper {
         return 'http://';
     }
 
+    /**
+     * Returns and links all CSS files found in: app/assets/css/ 
+     */
+    public static function OutputAllCSSLinks() {
+        global $app_config;
+        $allfiles = filesystem::RetrieveAllFilesFromDirectory($app_config['system_path'] . "/app/assets/stylesheets/");
+        $retval = array();
+        foreach ($allfiles as $cssfile) {
+            $line = "\n\r" . str_replace($app_config['system_path'], "", $cssfile);
+            array_push($retval, array("file" => $line));
+        }
+        return $retval;
+    }
+
+    /**
+     * Returns and links all Javascript files found in: app/assets/javascripts/ 
+     */
+    public static function OutputAllJavascriptLinks() {
+        
+    }
+
 }
 
 ?>
