@@ -43,7 +43,7 @@ class taglib {
     static function link_css($list) {
         $requested = explode(",", $list);
         foreach ($requested as $file) {
-            echo "<link rel=\"stylesheet\" href=\"../app/assets/stylesheets/" . $file . ".css\" type=\"text/css\" media=\"screen\">\n\r";
+            echo "<link rel=\"stylesheet\" href=\"" . dirname(urlmapper::GetFullWebPath()) . "/app/assets/stylesheets/" . $file . ".css\" type=\"text/css\" media=\"screen\">\n\r";
         }
         return;
     }
@@ -55,7 +55,7 @@ class taglib {
     static function link_js($list) {
         $requested = explode(",", $list);
         foreach ($requested as $file) {
-            echo "<script src=\"../app/assets/javascripts/" . $file . ".js\" type=\"text/javascript\"></script>\n\r";
+            echo "<script src=\"" . dirname(urlmapper::GetFullWebPath()) . "/app/assets/javascripts/" . $file . ".js\" type=\"text/javascript\"></script>\n\r";
         }
         return;
     }
@@ -65,7 +65,7 @@ class taglib {
      * @return type 
      */
     static function link_favicon() {
-        echo "<link rel=\"shortcut icon\" href=\"../app/assets/images/favicon.ico\">\n\r";
+        echo "<link rel=\"shortcut icon\" href=\"" . dirname(urlmapper::GetFullWebPath()) . "/app/assets/images/favicon.ico\">\n\r";
         return;
     }
 
