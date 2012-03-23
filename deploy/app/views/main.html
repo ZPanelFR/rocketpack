@@ -5,19 +5,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <% link_all_css %>
         <% link_all_js %>
+        <% link_js temple,asdasd,werr %>
+        <% link_css bootstrap,inda %>
     </head>
     <body>
         <% include form %>
         <div><%= WelcomeToRocketPack %></div>
-        
+
         <% control Names %>
         * <%@ firstname %> <%@ lastname %><br>
         <% end %>
-        
+
         <pre><%= ShowFooter %></pre>
-        
+
         <% form_init controller="main" execute="SayHello" %>
-        
+        <input type="submit" name="submit" value="Submit!">
         <% form_end %>
+        
+        <% assets_path %>
     </body>
 </html>

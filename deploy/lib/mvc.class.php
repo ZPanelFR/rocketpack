@@ -11,6 +11,7 @@ class mvc extends controller {
     }
 
     public function ParseTemplate() {
+        global $app_config;
         $class = $this->controller_request;
         if (class_exists('' . $class . '')) {
             $this_object = new $class();
@@ -32,7 +33,10 @@ class mvc extends controller {
             $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
             $raw = preg_replace('/\<% link_all_css %>/i', '<?php taglib::link_all_css(); ?>', $raw);
             $raw = preg_replace('/\<% link_all_js %>/i', '<?php taglib::link_all_js(); ?>', $raw);
-            $raw = preg_replace('/\<% form_init\ controller=\"(.+?)\"\ execute=\"(.+?)\"\ %>/i', '<form action="<?php echo "/$1?action=$2"; ?>" method="post">', $raw);
+            $raw = preg_replace('/\<% link_css (.+?)\ %>/i', '<?php taglib::link_css("$1"); ?>', $raw);
+            $raw = preg_replace('/\<% link_js (.+?)\ %>/i', '<?php taglib::link_js("$1"); ?>', $raw);
+            $raw = preg_replace('/\<% assets_path\ %>/i', '<?php taglib::assets_path(); ?>', $raw);
+            $raw = preg_replace('/\<% form_init\ controller=\"(.+?)\"\ execute=\"(.+?)\"\ %>/i', '<form action="' . urlmapper::GetFullWebPath() . '$1/?action=$2" method="post">', $raw);
             $raw = preg_replace('/\<% form_end %>/i', '</form>', $raw);
             return eval('?>' . $raw);
         } else {
