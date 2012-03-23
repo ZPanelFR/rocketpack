@@ -44,7 +44,7 @@ class controller {
     /**
      * Creates an instance for the requested model.
      * @param type $model
-     * @return \model 
+     * @return object 
      */
     public function GetControllerInstance($model) {
         if (!$model == "") {
@@ -56,6 +56,23 @@ class controller {
         } else {
             director::Redirect(urlmapper::GetFullWebPath() . $this->settings['main_controller']);
         }
+    }
+
+    /**
+     * Processes any specific controller action requests (FORM POST actions etc.)
+     * @return object 
+     */
+    public function ProcessControllerActionRequests() {
+        if (isset($_GET['action'])) {
+            $class = $this->controller_request;
+            $this_object = new $class();
+            if (class_exists('' . $class . '')) {
+                if (method_exists($class, "do" . $_GET['action'])) {
+                    call_user_func(array($this_object, "do" . $_GET['action']));
+                }
+            }
+        }
+        return;
     }
 
 }

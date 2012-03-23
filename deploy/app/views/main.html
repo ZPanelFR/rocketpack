@@ -9,20 +9,15 @@
     <body>
         <% include form %>
         <div><%= WelcomeToRocketPack %></div>
-        Welcome to RocketPack!
         
         <% control Names %>
         * <%@ firstname %> <%@ lastname %><br>
         <% end %>
         
         <pre><%= ShowFooter %></pre>
-        Css files:
-        <% control ShowCSSFiles %>
-        <%@ file %><br>
-        <% end %>
-        JS Files:
-        <% control ShowJSFiles %>
-        <%@ file %><br>
-        <% end %>
+        
+        <% form_init controller="main" execute="SayHello" %>
+        
+        <% form_end %>
     </body>
 </html>

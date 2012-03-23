@@ -8,18 +8,18 @@ class login extends controller {
         parent::__construct();
     }
     
-    public function WelcomeBlock(){
+    public function outWelcomeBlock(){
         return "Welcome to this test site, thanks for visiting!";
     }
-    public function WelcomeBlock3(){
+    public function outWelcomeBlock3(){
         return "Hi there, my name is boddty";
     }
     
-    public function SomeHTML(){
-        return "<h1>" .$this->WelcomeBlock(). "</h1>";
+    public function outSomeHTML(){
+        return "<h1>" .$this->outWelcomeBlock(). "</h1>";
     }
     
-    public function CheckThis(){
+    public function outCheckThis(){
         return "something here";
     }
 

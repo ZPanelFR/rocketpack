@@ -19,5 +19,10 @@ function __autoload($class_name) {
  * Lets load the controller and boot the application. 
  */
 $controller = new Controller;
+
+// Process all 'post' requests.
+$controller->ProcessControllerActionRequests();
+
+// If no specific requests to process, lets build the controller instance.
 $controller->GetControllerInstance($controller->controller_request);
 ?>

@@ -81,6 +81,13 @@ class urlmapper {
         return $retval;
     }
 
+    /**
+     * Does a controller redirect (Application redirect as opposed to a standard redirect.) 
+     */
+    public static function ApplicationRedirect($controller) {
+        director::Redirect(self::GetFullWebPath() . $controller);
+    }
+
 }
 
 ?>
