@@ -61,7 +61,7 @@ class urlmapper {
         $allfiles = filesystem::RetrieveAllFilesFromDirectory($app_config['system_path'] . "/app/assets/stylesheets/", "css");
         $retval = array();
         foreach ($allfiles as $cssfile) {
-            $line = "\n\r<link rel=\"stylesheet\" href=\"" . str_replace($app_config['system_path'], "", $cssfile) . "\" type=\"text/css\" media=\"screen\">";
+            $line = "<link rel=\"stylesheet\" href=\".." . str_replace($app_config['system_path'], "", $cssfile) . "\" type=\"text/css\" media=\"screen\">\r\n";
             array_push($retval, array("file" => $line));
         }
         return $retval;
@@ -75,7 +75,7 @@ class urlmapper {
         $allfiles = filesystem::RetrieveAllFilesFromDirectory($app_config['system_path'] . "/app/assets/javascripts/", "js");
         $retval = array();
         foreach ($allfiles as $jsfile) {
-            $line = "\n\r<script src=\"" . str_replace($app_config['system_path'], "", $jsfile) . "\" type=\"text/javascript\"></script>";
+            $line = "<script src=\".." . str_replace($app_config['system_path'], "", $jsfile) . "\" type=\"text/javascript\"></script>\r\n";
             array_push($retval, array("file" => $line));
         }
         return $retval;

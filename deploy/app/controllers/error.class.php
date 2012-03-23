@@ -8,12 +8,8 @@ class error extends controller {
         parent::__construct();
     }
     
-    public function outTitle(){
-        return "No model (" .$this->controller_request. ") found!";
-    }
-    
-    public function doAction(){
-        die("Its good, I was executed!");
+    public function outTheRequestedControllerName(){
+        return $this->controller_request;
     }
 
 }

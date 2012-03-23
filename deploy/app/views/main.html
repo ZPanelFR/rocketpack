@@ -1,26 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title><%= WelcomeToRocketPack %></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>RocketPack - Ready for lift-off!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="The default RocketPack page!">
+        <meta name="author" content="RocketPack">
         <% link_all_css %>
-        <% link_all_js %>
+        <% link_favicon %>
+        <style type="text/css">
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
     </head>
     <body>
-        <img src="<% assets_path %>images/rocketpack.png" title="RocketPack!"> 
-        <% include form %>
-        <div><%= WelcomeToRocketPack %></div>
+  <div class="container">
+            <div class="hero-unit">
+                <h1>Ready for lift-off!</h1>
+                <p>Awesome stuff! So as you're viewing this page RocketPack is now installed on your server or development machine which means you are now ready to start developing or deploying your application... Congratulations!</p>
+                <p><a class="btn btn-warning btn-large" href="http://bobsta63.github.com/rocketpack/" target="_blank">Learn more &raquo;</a></p>
+            </div>
+            <div class="row">
+                <div class="span4">
+                    <h2>Get your apps off to a flying start!</h2>
+                    <p>RocketPack has been designed to put the fun back into PHP development, RocketPack provides a light-weight MVC framework and a load of classes to help you get developing your application without the worry of all the underlying stuff!</p>
+                    <p><a class="btn" href="http://bobsta63.github.com/rocketpack/" target="_blank">Find out more &raquo;</a></p>
+                </div>
+                <div class="span4">
+                    <h2>Your first application?</h2>
+                    <p>If its your first time using RocketPack and want to get stuck in, we've created a short guide to how to use RocketPack!</p>
+                    <p><a class="btn" href="http://bobsta63.github.com/rocketpack/quickstart/" target="_blank">View details &raquo;</a></p>
+                </div>
+                <div class="span4">
+                    <h2>Deploying your app?</h2>
+                    <p>If you've just installed RocketPack on this server and plan to deploy an existing application that was built on the RocketPack framework but didn't realise it was super simple, please read on if you want to find out more!</p>
+                    <p><a class="btn" href="http://bobsta63.github.com/rocketpack/deployexisting/" target="_blank">View details &raquo;</a></p>
+                </div>
+            </div>
 
-        <% control Names %>
-        * <%@ firstname %> <%@ lastname %><br>
-        <% end %>
+            <hr>
 
-        <pre><%= ShowFooter %></pre>
+            <footer>
+                <p>Powered by <strong><a href="http://bobsta63.github.com/rocketpack/" target="_blank">RocketPack!</a></strong></p>
+            </footer>
 
-        <% form_init controller="main" execute="SayHello" %>
-        <input type="submit" name="submit" value="Submit!">
-        <% form_end %>
-        
-        <% assets_path %>
+        </div>
+        <% link_all_js %>
     </body>
 </html>
