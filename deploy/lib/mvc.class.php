@@ -15,7 +15,6 @@ class mvc extends controller {
         if (class_exists('' . $class . '')) {
             $this_object = new $class();
             $raw = file::ReadFile("app/views/" . $this_object->renderwith . "");
-            
             $match = null;
             preg_match_all("'<%=\s(.*?)\s%>'si", $raw, $match);
             if ($match) {
@@ -31,6 +30,8 @@ class mvc extends controller {
             $raw = preg_replace('/\<% control (.+?)\ %>/i', "<?php foreach(\$this_object->$1() as \$key => \$value){ ?>", $raw);
             $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo @file::ReadFile(\'app/views/\'.$1.\'.html\'); ?>', $raw);
             $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
+            $raw = preg_replace('/\<% link_all_css %>/i', '<?php taglib::link_all_css(); ?>', $raw);
+            $raw = preg_replace('/\<% link_all_js %>/i', '<?php taglib::link_all_js(); ?>', $raw);
             return eval('?>' . $raw);
         } else {
             return false;

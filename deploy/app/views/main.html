@@ -3,6 +3,8 @@
     <head>
         <title><%= WelcomeToRocketPack %></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <% link_all_css %>
+        <% link_all_js %>
     </head>
     <body>
         <% include form %>
@@ -14,9 +16,13 @@
         <% end %>
         
         <pre><%= ShowFooter %></pre>
-        
+        Css files:
         <% control ShowCSSFiles %>
-        * <%@ file %><br>
+        <%@ file %><br>
+        <% end %>
+        JS Files:
+        <% control ShowJSFiles %>
+        <%@ file %><br>
         <% end %>
     </body>
 </html>

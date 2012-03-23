@@ -29,6 +29,10 @@ class main extends controller {
     public function ShowCSSFiles() {
         return urlmapper::OutputAllCSSLinks();
     }
+    
+    public function ShowJSFiles(){
+        return urlmapper::OutputAllJavascriptLinks();
+    }
 
 }
 
