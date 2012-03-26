@@ -17,11 +17,15 @@ class urlmapper {
      */
     public static function AllSegmentsFromRequestURI() {
         global $app_config;
-        $fullrequest = urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-        $fullwebpath = urlmapper::ProtocolType() . $app_config['web_path'] . '/';
-        $clean = str_replace($fullwebpath, '', $fullrequest);
-        $values = explode("/", $clean);
-        return $values;
+        if (!isset($_GET['controller'])) {
+            $fullrequest = urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+            $fullwebpath = urlmapper::ProtocolType() . $app_config['web_path'] . '/';
+            $clean = str_replace($fullwebpath, '', $fullrequest);
+            $values = explode("/", $clean);
+            return $values;
+        } else {
+            return ModelRequestsFromRequestURI();
+        }
     }
 
     /**
@@ -29,10 +33,14 @@ class urlmapper {
      * @return string The named controller. 
      */
     public static function ControllerRequestFromRequestURI() {
-        $allmappings = self::AllSegmentsFromRequestURI();
-        if (!empty($allmappings[1]))
-            return $allmappings[1];
-        return false;
+        if (!isset($_GET['controller'])) {
+            $allmappings = self::AllSegmentsFromRequestURI();
+            if (!empty($allmappings[1]))
+                return $allmappings[1];
+            return false;
+        } else {
+            return $_GET['controller'];
+        }
     }
 
     /**
@@ -40,7 +48,11 @@ class urlmapper {
      * @ return array All other requests.
      */
     public static function ModelRequestsFromRequestURI() {
-        return array_slice(self::AllSegmentsFromRequestURI(), 2);
+        if (!isset($_GET['controller'])) {
+            return array_slice(self::AllSegmentsFromRequestURI(), 2);
+        } else {
+            return array_slice($_GET, 1);
+        }
     }
 
     /**
