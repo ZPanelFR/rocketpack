@@ -75,6 +75,13 @@ class controller {
         return;
     }
 
+    /**
+     * Provides an easy way to read and write session data.
+     */
+    public function Session() {
+        return new session;
+    }
+
 }
 
 ?>
