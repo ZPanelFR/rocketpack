@@ -52,6 +52,7 @@ class controller {
                 return new $model;
             } else {
                 director::Redirect(urlmapper::GetFullWebPath() . $this->settings['no_controller_error']);
+                logger::LogToFile('The requested controller \''.$model.'\' was not found!');
             }
         } else {
             director::Redirect(urlmapper::GetFullWebPath() . $this->settings['main_controller']);
