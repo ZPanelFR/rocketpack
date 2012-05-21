@@ -25,10 +25,11 @@ class system {
      *
      * Implements a universal way of running an application on the server and retuurning the result. 
      * @param string $command The full path to the command to execute.
-     * @return array The return value and output (which is an array)). 
+     * @return array The return value (normally 0 = ok, 1= error) and output (which is an array of the output lines)). 
      */
-    static function ExecuteApplication($command) {
-        @exec($command, $output, $retval);
+    static function ExecuteCommand($command) {
+        if(!exec($command, $output, $retval))
+             logger::LogToFile("[system::ExecuteCommand] - Error when attempted to execute \"" .$command. "\".");   
         //return array($retval, var_dump($output));
         return array($retval, $output);
     }
