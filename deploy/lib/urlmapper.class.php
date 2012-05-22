@@ -8,7 +8,8 @@ class urlmapper {
      */
     public static function GetFullWebPath() {
         global $app_config;
-        return urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'] . "/";
+        //return urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'] . "/";
+        return urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . str_replace("/index.php", "", $_SERVER['SCRIPT_NAME']) . "/";
     }
 
     /**
@@ -19,7 +20,7 @@ class urlmapper {
         global $app_config;
         if (!isset($_GET['controller'])) {
             $fullrequest = urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-            $fullwebpath = urlmapper::ProtocolType() . $app_config['web_path'] . '/';
+            $fullwebpath = urlmapper::ProtocolType() . $app_config['web_path'];
             $clean = str_replace($fullwebpath, '', $fullrequest);
             $values = explode("/", $clean);
             return $values;
