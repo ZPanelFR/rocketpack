@@ -7,7 +7,7 @@ class json {
      * @param string $json_string The JSON string to generate the PHP array from.
      * @return array 
      */
-    public function JSONToArray($json_string) {
+    static function JSONToArray($json_string) {
         return json_decode($json_string, true);
     }
 
@@ -16,7 +16,7 @@ class json {
      * @param array $array_data The PHP Array to generate the JSON string from.
      * @return string 
      */
-    public function ArrayToJSON($array_data) {
+    static function ArrayToJSON($array_data) {
         return json_encode($array_data);
     }
 
