@@ -35,10 +35,15 @@ class controller {
     function __construct() {
         global $app_config;
         $this->settings = $app_config;
-        $this->controller_request = urlmapper::ControllerRequestFromRequestURI();
         $this->sub_requests = urlmapper::ModelRequestsFromRequestURI();
         $this->postvars = $_POST;
         $this->getvars = $_GET;
+
+        if (!isset($_GET['controller'])) {
+            $this->controller_request = null;
+        } else {
+            $this->controller_request = $_GET['controller'];
+        }
     }
 
     /**
@@ -51,11 +56,11 @@ class controller {
             if (class_exists($model, true)) {
                 return new $model;
             } else {
-                director::Redirect(urlmapper::GetFullWebPath() . $this->settings['no_controller_error']);
-                logger::LogToFile('The requested controller \''.$model.'\' was not found!');
+                director::Redirect(urlmapper::GetFullWebPath() . "?controller=" . $this->settings['no_controller_error']);
+                logger::LogToFile('The requested controller \'' . $model . '\' was not found!');
             }
         } else {
-            director::Redirect(urlmapper::GetFullWebPath() . $this->settings['main_controller']);
+            director::Redirect(urlmapper::GetFullWebPath() ."?controller=". $this->settings['main_controller']);
         }
     }
 

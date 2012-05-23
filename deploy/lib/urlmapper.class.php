@@ -8,8 +8,7 @@ class urlmapper {
      */
     public static function GetFullWebPath() {
         global $app_config;
-        //return urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME'] . "/";
-        return urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . str_replace("/index.php", "", $_SERVER['SCRIPT_NAME']) . "/";
+        return $app_config['web_path'];
     }
 
     /**
@@ -20,7 +19,7 @@ class urlmapper {
         global $app_config;
         if (!isset($_GET['controller'])) {
             $fullrequest = urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-            $fullwebpath = urlmapper::ProtocolType() . $app_config['web_path'];
+            $fullwebpath = $app_config['web_path'];
             $clean = str_replace($fullwebpath, '', $fullrequest);
             $values = explode("/", $clean);
             return $values;
@@ -71,10 +70,10 @@ class urlmapper {
      */
     public static function OutputAllCSSLinks() {
         global $app_config;
-        $allfiles = filesystem::RetrieveAllFilesFromDirectory($app_config['system_path'] . "/app/assets/stylesheets/", "css");
+        $allfiles = filesystem::RetrieveAllFilesFromDirectory($app_config['system_path'] . "app/assets/stylesheets/", "css");
         $retval = array();
         foreach ($allfiles as $cssfile) {
-            $line = "<link rel=\"stylesheet\" href=\"" . dirname(urlmapper::GetFullWebPath()) . str_replace($app_config['system_path'], "", $cssfile) . "\" type=\"text/css\" media=\"screen\">\r\n";
+            $line = "<link rel=\"stylesheet\" href=\"" . urlmapper::GetFullWebPath() . str_replace($app_config['system_path'], "", $cssfile) . "\" type=\"text/css\" media=\"screen\">\r\n";
             array_push($retval, array("file" => $line));
         }
         return $retval;
@@ -98,7 +97,7 @@ class urlmapper {
      * Does a controller redirect (Application redirect as opposed to a standard redirect.) 
      */
     public static function ApplicationRedirect($controller) {
-        director::Redirect(self::GetFullWebPath() . $controller);
+        director::Redirect(self::GetFullWebPath() ."?controller=". $controller);
     }
 
 }
