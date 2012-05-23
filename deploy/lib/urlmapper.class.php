@@ -7,8 +7,7 @@ class urlmapper {
      * @return type 
      */
     public static function GetFullWebPath() {
-        global $app_config;
-        return $app_config['web_path'];
+        return urlmapper::ProtocolType() . $_SERVER['SERVER_NAME'] . dirname($_SERVER['SCRIPT_NAME']);
     }
 
     /**
@@ -73,7 +72,7 @@ class urlmapper {
         $allfiles = filesystem::RetrieveAllFilesFromDirectory($app_config['system_path'] . "app/assets/stylesheets/", "css");
         $retval = array();
         foreach ($allfiles as $cssfile) {
-            $line = "<link rel=\"stylesheet\" href=\"" . urlmapper::GetFullWebPath() . str_replace($app_config['system_path'], "", $cssfile) . "\" type=\"text/css\" media=\"screen\">\r\n";
+            $line = "<link rel=\"stylesheet\" href=\"" . urlmapper::GetFullWebPath() ."/". str_replace($app_config['system_path'], "", $cssfile) . "\" type=\"text/css\" media=\"screen\">\r\n";
             array_push($retval, array("file" => $line));
         }
         return $retval;
@@ -87,7 +86,7 @@ class urlmapper {
         $allfiles = filesystem::RetrieveAllFilesFromDirectory($app_config['system_path'] . "/app/assets/javascripts/", "js");
         $retval = array();
         foreach ($allfiles as $jsfile) {
-            $line = "<script src=\"" . dirname(urlmapper::GetFullWebPath()) . str_replace($app_config['system_path'], "", $jsfile) . "\" type=\"text/javascript\"></script>\r\n";
+            $line = "<script src=\"" . dirname(urlmapper::GetFullWebPath()) ."/". str_replace($app_config['system_path'], "", $jsfile) . "\" type=\"text/javascript\"></script>\r\n";
             array_push($retval, array("file" => $line));
         }
         return $retval;
