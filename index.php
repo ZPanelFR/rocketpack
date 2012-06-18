@@ -54,9 +54,9 @@ if (isset($_GET['controller'])) {
         }
         // If its a GET request we'll continue to execute the template and MVC parser..
         if (isset($this_object->renderwith)) {
-            $raw = filesystem::ReadFile("view/" . zhm_style . "/" . $this_object->renderwith . ".html");
+            $raw = file::ReadFile("view/" . zhm_style . "/" . $this_object->renderwith . ".html");
         } else {
-            $raw = filesystem::ReadFile("view/" . zhm_style . "/" . $class . ".html");
+            $raw = file::ReadFile("view/" . zhm_style . "/" . $class . ".html");
         }
 
         $match = null;
@@ -73,7 +73,7 @@ if (isset($_GET['controller'])) {
         $raw = preg_replace('/\<% if (.+?)\ %>/i', '<?php if(\$this_object->out$1()){ ?>', $raw);
         $raw = preg_replace('/\<% control (.+?)\ %>/i', "<?php foreach(\$this_object->out$1() as \$key => \$value){ ?>", $raw);
         $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
-        $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo ParseInclude(@filesystem::ReadFile(\'view/' . zhm_style . '/includes/\'.$1.\'.html\')); ?>', $raw);
+        $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo ParseInclude(@file::ReadFile(\'view/' . zhm_style . '/includes/\'.$1.\'.html\')); ?>', $raw);
         $raw = preg_replace('/\<% style_path\ %>/i', './style/' . zhm_style . '/', $raw);
 
         // Multi part URL link generation.
@@ -86,8 +86,9 @@ if (isset($_GET['controller'])) {
         notice::ResetNotice();
         notice::ResetWarning();
     } else {
-        echo "Sorry no 'model' found for '" . $_GET['controller'] . "'.";
         header("HTTP/1.0 404 Not Found");
+        echo "<h1>Sorry no controller found for '" . $_GET['controller'] . "'.</h1>";
+        
         exit;
     }
 } else {
@@ -118,7 +119,7 @@ function ParseInclude($raw) {
     $raw = preg_replace('/\<% if (.+?)\ %>/i', '<?php if(\$this_object->out$1()){ ?>', $raw);
     $raw = preg_replace('/\<% control (.+?)\ %>/i', "<?php foreach(\$this_object->out$1() as \$key => \$value){ ?>", $raw);
     $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
-    $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo @filesystem::ReadFile(\'view/' . zhm_style . '/includes/\'.$1.\'.html\'); ?>', $raw);
+    $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo @file::ReadFile(\'view/' . zhm_style . '/includes/\'.$1.\'.html\'); ?>', $raw);
     $raw = preg_replace('/\<% style_path\ %>/i', './style/' . zhm_style . '/', $raw);
 
     // Multi part URL link generation.
