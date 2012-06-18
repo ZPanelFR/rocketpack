@@ -1,0 +1,12 @@
+RewriteEngine On
+Options +FollowSymlinks
+RewriteBase /hm/
+RewriteRule ^(view|public|doc)(/.*)?$ - [L] # List of Directories to ignore!
+RewriteCond %{REQUEST_URI} !index.php
+RewriteRule ^([^/]+)/?$ index.php?controller=$1 [L]
+RewriteCond %{REQUEST_URI} !index.php
+RewriteRule ^([^/]+)/([^/]+)/?$ index.php?controller=$1&action=$2 [L]
+RewriteCond %{REQUEST_URI} !index.php
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?$ index.php?controller=$1&action=$2&id=$3 [L]
+RewriteCond %{REQUEST_URI} !index.php
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ index.php?controller=$1&action=$2&id=$3&otherid=$4 [L]
