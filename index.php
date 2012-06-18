@@ -54,9 +54,9 @@ if (isset($_GET['controller'])) {
         }
         // If its a GET request we'll continue to execute the template and MVC parser..
         if (isset($this_object->renderwith)) {
-            $raw = file::ReadFile("view/" . zhm_style . "/" . $this_object->renderwith . ".html");
+            $raw = file::ReadFile("view/" . $this_object->renderwith . ".html");
         } else {
-            $raw = file::ReadFile("view/" . zhm_style . "/" . $class . ".html");
+            $raw = file::ReadFile("view/" . $class . ".html");
         }
 
         $match = null;
@@ -73,7 +73,7 @@ if (isset($_GET['controller'])) {
         $raw = preg_replace('/\<% if (.+?)\ %>/i', '<?php if(\$this_object->out$1()){ ?>', $raw);
         $raw = preg_replace('/\<% control (.+?)\ %>/i', "<?php foreach(\$this_object->out$1() as \$key => \$value){ ?>", $raw);
         $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
-        $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo ParseInclude(@file::ReadFile(\'view/' . zhm_style . '/includes/\'.$1.\'.html\')); ?>', $raw);
+        $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo ParseInclude(@file::ReadFile(\'view/\'.$1.\'.html\')); ?>', $raw);
         $raw = preg_replace('/\<% style_path\ %>/i', './style/' . zhm_style . '/', $raw);
 
         // Multi part URL link generation.
@@ -92,7 +92,7 @@ if (isset($_GET['controller'])) {
         exit;
     }
 } else {
-    header("location: " . link::build(zhm_std_ctrlr) . "");
+    header("location: " . link::build(app_defaultcontroller) . "");
     exit;
 }
 
@@ -101,11 +101,11 @@ function ParseInclude($raw) {
     preg_match_all("'<%=\s(.*?)\s%>'si", $raw, $match);
 
     if ($match) {
-        if (file_exists("controller/tplcontroller.php")) {
-            require_once "controller/tplcontroller.php";
+        if (file_exists("controller/_viewinclude.php")) {
+            require_once "controller/_viewinclude.php";
         }
-        if (class_exists('tplcontroller')) {
-            $tpl_controller = new tplcontroller();
+        if (class_exists('_viewinclude')) {
+            $tpl_controller = new _viewinclude();
 
             foreach ($match[1] as $method) {
                 $raw = str_replace("<%= " . $method . " %>", call_user_func(array($tpl_controller, "out" . $method)), $raw);
@@ -119,7 +119,7 @@ function ParseInclude($raw) {
     $raw = preg_replace('/\<% if (.+?)\ %>/i', '<?php if(\$this_object->out$1()){ ?>', $raw);
     $raw = preg_replace('/\<% control (.+?)\ %>/i', "<?php foreach(\$this_object->out$1() as \$key => \$value){ ?>", $raw);
     $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
-    $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo @file::ReadFile(\'view/' . zhm_style . '/includes/\'.$1.\'.html\'); ?>', $raw);
+    $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo @file::ReadFile(\'view/\'.$1.\'.html\'); ?>', $raw);
     $raw = preg_replace('/\<% style_path\ %>/i', './style/' . zhm_style . '/', $raw);
 
     // Multi part URL link generation.
