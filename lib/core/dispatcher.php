@@ -3,6 +3,12 @@
 /**
  * The main template parser.
  */
+$simplecache = new cache();
+$timer = new iotimer();
+
+$simplecache->set_cache_dir(app_cachepath);
+$timer->start_watch();
+
 if (isset($_GET['controller'])) {
     $class = $_GET['controller'];
     if (class_exists('' . $class . '')) {
@@ -96,4 +102,8 @@ function ParseInclude($raw) {
     return eval('?>' . $raw);
 }
 
+if (isset($this_object->cache) && $this_object->cache == TRUE) {
+    $simplecache->stop_cache();
+}
+$timer->stop_watch();
 ?>
