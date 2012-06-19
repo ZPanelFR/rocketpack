@@ -14,6 +14,7 @@ define('app_db_pass', 'PASSWORD');
 
 
 define('app_salt', 'put your unique phrase/key here');
+define('app_cachepath', 'cache/');
 define('app_urlrewrite', true);
 define('app_classpath', 'model/,lib/core/,lib/vendor/'); // Comma seperated class folders, the classes in these folder will be automatically loaded.
 // Set the application absolute path..
