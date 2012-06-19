@@ -74,7 +74,7 @@ if (isset($_GET['controller'])) {
         $raw = preg_replace('/\<% control (.+?)\ %>/i', "<?php foreach(\$this_object->out$1() as \$key => \$value){ ?>", $raw);
         $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
         $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo ParseInclude(@file::ReadFile(\'view/\'.$1.\'.html\')); ?>', $raw);
-        $raw = preg_replace('/\<% style_path\ %>/i', './style/' . zhm_style . '/', $raw);
+        $raw = preg_replace('/\<% public_path\ %>/i', '' . link::webfolder() . 'public/', $raw);
 
         // Multi part URL link generation.
         $raw = preg_replace('/\<% link_to {:controller=(.+?) :action=(.+?) :id=(.+?) :otherid=(.+?)}\ %>/i', '<?php echo link::build(\'$1\',\'$2\',\'$3\',\'$4\'); ?>', $raw);
@@ -88,7 +88,7 @@ if (isset($_GET['controller'])) {
     } else {
         header("HTTP/1.0 404 Not Found");
         echo "<h1>Sorry no controller found for '" . $_GET['controller'] . "'.</h1>";
-        
+
         exit;
     }
 } else {
@@ -120,7 +120,7 @@ function ParseInclude($raw) {
     $raw = preg_replace('/\<% control (.+?)\ %>/i', "<?php foreach(\$this_object->out$1() as \$key => \$value){ ?>", $raw);
     $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
     $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo @file::ReadFile(\'view/\'.$1.\'.html\'); ?>', $raw);
-    $raw = preg_replace('/\<% style_path\ %>/i', './style/' . zhm_style . '/', $raw);
+    $raw = preg_replace('/\<% public_path\ %>/i', '' . link::webfolder() . 'public/', $raw);
 
     // Multi part URL link generation.
     $raw = preg_replace('/\<% link_to {:controller=(.+?) :action=(.+?) :id=(.+?) :otherid=(.+?)}\ %>/i', '<?php echo link::build(\'$1\',\'$2\',\'$3\',\'$4\'); ?>', $raw);

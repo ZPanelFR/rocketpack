@@ -19,7 +19,7 @@ class index extends rpdb {
      * @return type 
      */
     public function outServerSoftwareIs(){
-        return $_SERVER[SERVER_SOFTWARE];
+        return $_SERVER['SERVER_SOFTWARE'];
     }
     
 }
