@@ -8,10 +8,10 @@
 define('app_defaultcontroller', 'index');
 
 // MySQL database settings for the ZHM databse 
-define('zhm_db_host', 'localhost');
-define('zhm_db_name', 'DBNAME');
-define('zhm_db_user', 'USERNAME');
-define('zhm_db_pass', 'PASSWORD');
+define('app_db_host', 'localhost');
+define('app_db_name', 'DBNAME');
+define('app_db_user', 'USERNAME');
+define('app_db_pass', 'PASSWORD');
 
 
 define('app_salt', 'put your unique phrase/key here');

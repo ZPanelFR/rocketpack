@@ -32,7 +32,7 @@ class authentication extends rpdb {
     }
 
     public static function GetLoggedInUserDetails() {
-        $zhm = new db("mysql:host=" . zhm_db_host . ";dbname=" . zhm_db_name . "", "" . zhm_db_user . "", "" . zhm_db_pass . "");
+        $zhm = new db("mysql:host=" . app_db_host . ";dbname=" . app_db_name . "", "" . app_db_user . "", "" . app_db_pass . "");
         $user = $zhm->select("t_user", "in_us_fk = " . self::GetLoggedInUserID() . "");
         return $user;
     }
