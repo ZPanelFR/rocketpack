@@ -60,7 +60,7 @@ class cache {
 
     public function stop_cache() {
         $data = ob_get_clean();
-        $this->save_cache($data);
+        $this->save_cache($data . "<!-- Page served from rpCache, cache generated " . date("r") . " -->\n");
         echo $data;
     }
 
