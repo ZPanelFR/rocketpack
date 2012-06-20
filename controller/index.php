@@ -1,6 +1,6 @@
 <?php
 
-class index extends rpdb {
+class index extends rocketpack {
     
     //var $cache = true; // Enable page caching? - Not recommended on dynamic (constantly changing) pages.
     //var $cahce_life = 60; // Total amount of time (seconds) to keep a cahced version of this file.
@@ -18,7 +18,7 @@ class index extends rpdb {
      * Another example of a method.
      * @return type 
      */
-    public function outServerSoftwareIs(){
+    public function outServerSoftwareIs(){        
         return $_SERVER['SERVER_SOFTWARE'];
     }
     

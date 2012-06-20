@@ -1,6 +1,6 @@
 <?php
 
-class rpdb {
+class rocketpack {
 
     /**
      * A very simple way to share the database handle across classes.

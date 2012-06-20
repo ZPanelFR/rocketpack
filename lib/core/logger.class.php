@@ -2,20 +2,27 @@
 
 class logger {
 
+    var $log_folder;
+
+    /**
+     * Sets the folder path to where the log files will reside.
+     * @param string $path The path to the loggging folder.
+     */
+    public function setLogPath($path) {
+        $this->log_folder = $path;
+    }
+
     /**
      * Logs an given error message to a text file.
      * @param string $message The error message to add to the log file.
-     * @param string $file The full path and file name to the log file.
      */
-    static function LogToFile($message, $file = null) {
-        global $app_config;
-        if (empty($file)) {
-            file::AppendFile($app_config['default_log_file'], time::FormatTimestamp(time::CurrentTimestamp(), DATE_ATOM) . " - " . $message . "\r\n");
+    public function LogToFile($message) {
+        if (empty($log_folder)) {
+            file::AppendFile(app_logpath . '' . date("log-d-m-Y") . '.log', time::FormatTimestamp(time::CurrentTimestamp(), DATE_ATOM) . " - " . $message . "\r\n");
         } else {
             file::AppendFile($file, time::FormatTimestamp(time::CurrentTimestamp(), DATE_ATOM) . " - " . $message . "\r\n");
         }
     }
 
 }
-
 ?>
