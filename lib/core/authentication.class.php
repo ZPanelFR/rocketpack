@@ -1,6 +1,6 @@
 <?php
 
-class authentication extends rpdb {
+class authentication extends rocketpack {
 
     /**
      * Checks to see if the current session is a logged in user.
@@ -32,8 +32,7 @@ class authentication extends rpdb {
     }
 
     public static function GetLoggedInUserDetails() {
-        $zhm = new db("mysql:host=" . app_db_host . ";dbname=" . app_db_name . "", "" . app_db_user . "", "" . app_db_pass . "");
-        $user = $zhm->select("t_user", "in_us_fk = " . self::GetLoggedInUserID() . "");
+        $user = $this->Database()->select("t_user", "in_us_fk = " . self::GetLoggedInUserID() . "");
         return $user;
     }
 
