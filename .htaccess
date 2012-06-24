@@ -1,6 +1,6 @@
 RewriteEngine On
 Options +FollowSymlinks
-RewriteBase /rp/
+RewriteBase /rocketpack/
 RewriteRule ^(public)(/.*)?$ - [L] # List of Directories to ignore! (Seperated with a pipe '|' character.)
 RewriteCond %{REQUEST_URI} !index.php
 RewriteRule ^([^/]+)/?$ index.php?controller=$1 [L]
