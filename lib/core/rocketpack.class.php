@@ -23,6 +23,14 @@ class rocketpack {
         return new session();
     }
 
+    /**
+     * A very simple way to log errors etc. 
+     */
+    protected function Log() {
+        $logger = new logger();
+        return $logger;
+    }
+
 }
 
 ?>

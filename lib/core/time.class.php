@@ -12,16 +12,14 @@ class time {
 
     /**
      * Formats a UNIX timestamp.
-     * @global type $app_config
      * @param type $timestamp
      * @param type $format
      * @return type 
      */
     static function FormatTimestamp($timestamp, $format = null) {
-        global $app_config;
         if ($format)
             return date($format, $timestamp);
-        return date($app_config['default_time_format'], $timestamp);
+        return date("r", $timestamp);
     }
 
     /**

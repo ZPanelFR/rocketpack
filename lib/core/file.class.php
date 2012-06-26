@@ -11,7 +11,6 @@ class file {
         if (@file_get_contents($file)) {
             return file_get_contents($file);
         } else {
-            logger::LogToFile("[file::ReadFile] Unable to read file (" . $file . ")");
             return false;
         }
     }
