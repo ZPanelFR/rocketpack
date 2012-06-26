@@ -16,6 +16,13 @@ class rocketpack {
         return new option();
     }
 
+    /**
+     * A very simple way to read and write session variables.
+     */
+    protected function Session() {
+        return new session();
+    }
+
 }
 
 ?>
