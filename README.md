@@ -2,6 +2,8 @@ What is RocketPack?
 -------------------
 RocketPack is a simple, light-weight, easy to learn and code-on PHP MVC framework that aims to help you build robust, secure and stable web applications in very little time!
 
+![RocketPack Logo](http://ballen.co.uk/rocketpack_logo.png "RocketPack Logo")
+
 
 Why RocketPack was developed
 ----------------------------
