@@ -8,11 +8,11 @@ define('app_defaultcontroller', 'index');
 
 // MySQL database settings for the ZHM databse 
 define('app_db_host', 'localhost');
-define('app_db_name', 'DBNAME');
-define('app_db_user', 'USERNAME');
-define('app_db_pass', 'PASSWORD');
+define('app_db_name', 'rocketpack');
+define('app_db_user', 'root');
+define('app_db_pass', '');
 
-
+define('app_sessionhandle', 'file'); // What session storage medium do you want to use? ('file' or 'db')
 define('app_salt', 'put your unique phrase/key here');
 define('app_cachepath', 'cache/');
 define('app_logpath', 'log/');
