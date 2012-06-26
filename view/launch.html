@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RocketPack | Ready for lift-off</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1>Pre-takeoff checks..</h1>
+        <h2>Folder permissions</h2>
+        <div>
+            <b>Log directory (<%= PathLogs %>)</b> - [<% if IsExistLogs %>Exists<% else %>Does not exist<% end %>] [<% if IsWritableLogs %>Writable<% else %>Not writable!<% end %>]<br>
+            <b>Temp directory (<%= PathTemp %>)</b> - [<% if IsExistTemp %>Exists<% else %>Does not exist<% end %>] [<% if IsWritableTemp %>Writable<% else %>Not writable!<% end %>]<br>
+            <b>Cache directory (<%= PathCache %>)</b> - [<% if IsExistCache %>Exists<% else %>Does not exist<% end %>] [<% if IsWritableCache %>Writable<% else %>Not writable!<% end %>]<br>
+        </div>
+        <h2>Database connectivity</h2>
+        <div>Unable to connect the the database, If you plan on using the database please set configuration details in <b>config.php</b></div>
+        <h2>Database schema</h2>
+        <div>Ensure if you intend on using the database that the follow SQL has been run to create your database schema.
+            <pre>
+    CREATE DATABASE IF NOT EXISTS `rocketpack` /*!40100 DEFAULT CHARACTER SET utf8 */;
+    USE `rocketpack`;
+
+    DROP TABLE IF EXISTS `t_session`;
+    CREATE TABLE `t_session` (
+        se_hash_vc` varchar(100) NOT NULL,
+        `se_data_tx` text,
+        `se_expires_ts` int(11) NOT NULL,
+        PRIMARY KEY (`se_hash_vc`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+    DROP TABLE IF EXISTS `t_setting`;
+    CREATE TABLE `t_setting` (
+        `so_name_vc` varchar(50) NOT NULL,
+        `so_value_tx` text,
+        `so_comment_tx` text,
+        PRIMARY KEY (`so_name_vc`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            </pre>
+        </div>
+    </body>
+</html>
