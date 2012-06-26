@@ -11,6 +11,7 @@ class sessionmanager extends rocketpack {
 
     public function __construct() {
         $this->dbstorage = app_dbsessions;
+
         if ($this->dbstorage) {
             session_set_save_handler(
                     array($this, "open"), array($this, "close"), array($this, "read"), array($this, "write"), array($this, "destroy"), array($this, "gc"));

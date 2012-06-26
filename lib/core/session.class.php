@@ -13,6 +13,10 @@ class session {
         return $_SESSION[$session_var_name];
     }
 
+    public function Destroy() {
+        return session_destroy();
+    }
+
 }
 
 ?>
