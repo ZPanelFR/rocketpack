@@ -3,44 +3,90 @@
     <head>
         <title>RocketPack | Ready for lift-off</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            body{
+                margin-top: 20px;
+                margin-left: 20px;
+                margin-right: 20px;
+                margin-bottom: 60px;
+                font-family: sans-serif;
+                font-size: 0.8em;
+            }
+            h1
+            {
+                font-family:helvetica, sans-serif;
+
+                font-size: 2.2em;
+            }
+            h2
+            {
+                font-family:helvetica, sans-serif;
+                font-size: 1.5em;
+            }
+            .good
+            {
+                font-weight: bold;
+                color: green;
+            }
+            .bad
+            {
+                font-weight: bold;
+                color: red;
+            }
+            .ok
+            {
+                font-weight: bold;
+                font-color: orange;
+            }
+        </style>
     </head>
     <body>
-        <h1>Pre-takeoff checks..</h1>
-        <h2>PHP Extensions</h2>
+        <img src="https://a248.e.akamai.net/camo.github.com/6ccc8a0efd7c3cb680a90cde05cb71738a7b7358/687474703a2f2f62616c6c656e2e636f2e756b2f726f636b65747061636b5f6c6f676f2e706e67">
+        <h1>Pre-launch checks..</h1>
+        <p>This quick overview page is designed to help you get up and running quick and simply!</p>
+        <h2>PHP Version and Extentions</h2>
         <div>
-            The following PHP extensions are recommended to be installed before continuing..
+            <p><strong>Your current PHP version:</strong> <%= PHPVersion %></p>
+            <p>The following PHP extensions are recommended to be installed before continuing..</p>
             <ul>
-                <li>PDO Support [<% if IsPDO %>Yes<% else %>No<% end %>]</li>
-                <li>Apache mod_rewrite support [<% if ApacheModules %>Yes<% else %>No<% end %>]</li>
+                <li><strong>PDO Support:</strong> <% if IsPDO %><font color="green">Yes</font><% else %><font color="orange">No - optional</font><% end %></li>
+                <li><strong>Apache mod_rewrite support:</strong> <% if ApacheModules %><font color="green">Yes</font><% else %><font color="orange">No - optional</font><% end %></li>
             </ul>
         </div>
         <% if CheckSaltIsNotSet %>
-        <h2>Application salt</h2>
-        <div>
+        <h2>Application Salt</h2>
+        <p>The Application Salt is a random key which you set in the <strong>config.php</strong> file, this is then used with core classes to hash strings to make them more secure and protect against hash dictionaries etc.</p>
+        <div class="bad">
             <p><strong>WARNING:</strong> Your applications 'salt' has not been set, you could create a random string here to enable any application and password hashing is more secure! You should configure this in <strong>config.php</strong></p>
         </div>
         <% end %>
-        <h2>Folder permissions</h2>
+        <h2>Folder Permissions</h2>
         <div>
-            <b>Log directory (<%= PathLogs %>)</b> - [<% if IsExistLogs %>Exists<% else %>Does not exist<% end %>] [<% if IsWritableLogs %>Writable<% else %>Not writable!<% end %>]<br>
-            <b>Temp directory (<%= PathTemp %>)</b> - [<% if IsExistTemp %>Exists<% else %>Does not exist<% end %>] [<% if IsWritableTemp %>Writable<% else %>Not writable!<% end %>]<br>
-            <b>Cache directory (<%= PathCache %>)</b> - [<% if IsExistCache %>Exists<% else %>Does not exist<% end %>] [<% if IsWritableCache %>Writable<% else %>Not writable!<% end %>]<br>
+            <b>Log directory (<%= PathLogs %>)</b> - [<% if IsExistLogs %><font color="green">Exists</font><% else %><font color="red">Does not exist</font><% end %>] [<% if IsWritableLogs %><font color="green">Writable</font><% else %><font color="red">Not writable!</font><% end %>]<br>
+            <b>Temp directory (<%= PathTemp %>)</b> - [<% if IsExistTemp %><font color="green">Exists</font><% else %><font color="red">Does not exist</font><% end %>] [<% if IsWritableTemp %><font color="green">Writable</font><% else %><font color="red">Not writable!</font><% end %>]<br>
+            <b>Cache directory (<%= PathCache %>)</b> - [<% if IsExistCache %><font color="green">Exists</font><% else %><font color="red">Does not exist</font><% end %>] [<% if IsWritableCache %><font color="green">Writable</font><% else %><font color="red">Not writable!</font><% end %>]<br>
         </div>
-        <h2>Database connectivity (optional)</h2>
-        <div><p><% if CheckDatabaseConnect %>Congratulations, we've connected to your database (<em><%= DatabaseName %></em>) just fine!<% else %>Unable to connect the the database, If you plan on using the database please set configuration details in <b>config.php</b><% end %></p></div>
+        <h2>Database connectivity and default schema (optional)</h2>
+        <p><% if CheckDatabaseConnect %><div class="good">Congratulations, we've connected to your database (<em><%= DatabaseName %></em>) just fine!</div><% else %><div class="ok">Unable to connect the the database, If you plan on using the database please set configuration details in <b>config.php</b></div><% end %></p>
         <% if CheckDatabaseConnect %>
-        <div><p>The current avaliable PDO drivers on your server are:
+        <div><p>For your information, the current avaliable PDO drivers on your server are:
             <ul>
                 <% control GetAvailableDatabaseDrivers %>
                 <li><%@ driver %></li>
                 <% end %>
             </ul></p></div>
-        <% end %>
-        <h2>Database schema  (optional)</h2>
-        <div>Ensure if you intend on using the database that the follow SQL has been run to create your database schema. The below schema provides some basic tables of which some of our core classes rely on to store system options and if you decide to enable, database sessions as a replacement for the standard PHP file sessions.
-            <pre>
-    CREATE DATABASE IF NOT EXISTS `rocketpack` /*!40100 DEFAULT CHARACTER SET utf8 */;
-    USE `rocketpack`;
+    <% end %>
+    <div>
+        <p>
+            <% if CheckStandardTables %>
+        <div class="good">Great, you appear to have the standard RocketPack tables already added! - You can make better use of our standard classes such as our system options class and ability to use the database for session storage out of the box!</div>
+        <% else %>
+        <div class="ok">Although you have a connection to your configured database, it appears that you don't have the default schema install! - This isn't required but is useful as some of the core RocketPack features such as the ability to use database sessions use our standard schema.</div>
+
+        If you want to add this database now, please execute this file against your database and then re-load this page to confirm all went good :-)
+        <pre>
+    CREATE DATABASE IF NOT EXISTS `<%= DatabaseName %>` /*!40100 DEFAULT CHARACTER SET utf8 */;
+    USE `<%= DatabaseName %>`;
 
     DROP TABLE IF EXISTS `t_session`;
     CREATE TABLE `t_session` (
@@ -57,7 +103,14 @@
         `so_comment_tx` text,
         PRIMARY KEY (`so_name_vc`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-            </pre>
-        </div>
-    </body>
+        </pre>
+        <% end %>
+    </p>
+</div>
+<h2>Ready for lift-off?</h2>
+<div>
+    <p>Hopefully from the above information this has given you an idea of things you should address before attempting to use RocketPack to build your web application on.</p>
+    <p>I hope you enjoy using RocketPack!</p>
+</div>
+</body>
 </html>

@@ -68,6 +68,12 @@ class launch extends rocketpack {
         return false;
     }
 
+    public function outCheckStandardTables() {
+        if ($this->Database()->select("t_session"))
+            return true;
+        return false;
+    }
+
     public function outDatabaseName() {
         return app_db_name;
     }
@@ -76,6 +82,10 @@ class launch extends rocketpack {
         if (app_salt == 'put your unique phrase/key here')
             return true;
         return false;
+    }
+    
+    public function outPHPVersion(){
+        return PHP_VERSION;
     }
 
 }
