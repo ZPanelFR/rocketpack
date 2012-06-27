@@ -7,6 +7,7 @@
 define('app_defaultcontroller', 'index');
 
 // MySQL database settings for the ZHM databse 
+define('app_db_driver','mysql');
 define('app_db_host', 'localhost');
 define('app_db_name', 'rocketpack');
 define('app_db_user', 'root');
