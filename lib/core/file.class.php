@@ -62,6 +62,39 @@ class file {
         file::UpdateFile($file, $new_version);
     }
 
+    /**
+     * Check to see if a file is wriable.
+     * @param string $file The filename and path of the file to check.
+     * @return boolean 
+     */
+    static function IsWritable($file) {
+        if (is_writable($file))
+            return true;
+        return false;
+    }
+
+    /**
+     * Check to see if a file is readable.
+     * @param string $file The filename and path of the file to check.
+     * @return boolean 
+     */
+    static function IsReadable($file) {
+        if (is_readable($file))
+            return true;
+        return false;
+    }
+
+    /**
+     * Check to see if a file is executable.
+     * @param string $file The filename and path of the file to check.
+     * @return boolean 
+     */
+    static function IsExecutable($file) {
+        if (is_executable($file))
+            return true;
+        return false;
+    }
+
 }
 
 ?>
