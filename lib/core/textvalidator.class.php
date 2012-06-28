@@ -58,6 +58,24 @@ class textvalidator {
         return false;
     }
 
+    /**
+     * Returns the lenght of the given string.
+     * @param string $string The string to count the lengh of.
+     * @return int Number of characters in the string. 
+     */
+    static function Length($string) {
+        return strlen($string);
+    }
+
+    /**
+     * Returns the amount of words in a given string.
+     * @param string $string The string to count the number of words in.
+     * @return int The total number of words in the string. 
+     */
+    static function WordCount($string) {
+        return str_word_count($string);
+    }
+
 }
 
 ?>
