@@ -28,10 +28,10 @@ class system {
      * @return array The return value (normally 0 = ok, 1= error) and output (which is an array of the output lines)). 
      */
     static function ExecuteCommand($command) {
-        if(!exec($command, $output, $retval))
-             logger::LogToFile("[system::ExecuteCommand] - Error when attempted to execute \"" .$command. "\".");   
-        //return array($retval, var_dump($output));
-        return array($retval, $output);
+        $retval = null;
+        $output = null;
+        $handle = @exec($command, $output, $retval); //If $retval[0] == 1 then an error occured, the command is invalid etc.
+        return array($retval, $output); // Iterate over $retval[1][x] to get the output values.
     }
 
 }
