@@ -11,7 +11,6 @@ class http {
         if (@file_get_contents($url)) {
             return file_get_contents($url);
         } else {
-            logger::LogToFile("[http::ReadDataFromURL] Unable to read from URL: " . $url . "");
             return false;
         }
     }
@@ -25,7 +24,6 @@ class http {
      */
     public function ReadDataFromSSLURL($url, $verifycert = true) {
         if (!@curl_init()) {
-            logger::LogToFile("[http::ReadDataFromSSLURL] The PHP cURL extentsion is not avaliable!");
             return false;
         } else {
             $ch = curl_init();
@@ -56,11 +54,11 @@ class http {
         $ctx = stream_context_create($params);
         $fp = @fopen($url, 'rb', false, $ctx);
         if (!$fp) {
-            logger::LogToFile("[http::SendPostRequest] Problem reading data from " . $url . "");
+            return false;
         }
         $response = @stream_get_contents($fp);
         if ($response == false) {
-            logger::LogToFile("Problem reading data from " . $url . "");
+            return false;
         }
         return $response;
     }
