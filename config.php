@@ -3,10 +3,11 @@
 /**
  * RocketPack Configuration File
  */
-// Redirect on a non-specific controller request
+
+// Default application controller
 define('app_defaultcontroller', 'index');
 
-// MySQL database settings for the ZHM databse 
+// Database connection settings (PDO)
 define('app_db_driver','mysql');
 define('app_db_host', 'localhost');
 define('app_db_name', 'rocketpack');
@@ -22,7 +23,8 @@ define('app_logpath', 'log/');
 define('app_tmppath', 'tmp/');
 
 define('app_classpath', 'model/,lib/core/,lib/vendor/'); // Comma seperated class folders, the classes in these folder will be automatically loaded.
-// Set the application absolute path..
+
+// Set the application absolute path
 if (!defined('app_path'))
     define('app_path', dirname(__FILE__) . '/');
 ?>
