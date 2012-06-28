@@ -16,7 +16,6 @@ class system {
             $retval = "FreeBSD";
         } else {
             $retval = "Other";
-            logger::LogToFile("[system::OSType] - Unable to determine the server OS type.");
         }
         return $retval;
     }
