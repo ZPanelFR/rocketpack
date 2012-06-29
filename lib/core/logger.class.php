@@ -19,12 +19,17 @@ class logger {
     /**
      * Logs an given error message to a text file. - If no path is specified with use the 'app_logpath' plus the current date for the log file.
      * @param string $message The error message to add to the log file.
+     * @param boolean $showpostdata If set to true, this will display the POST data for the request.
      */
-    public function LogToFile($message) {
+    public function LogToFile($message, $showpostdata = false) {
+        $postdata = null;
+        if ($showpostdata)
+            $postdata = " - POST DATA: " . print_r($_POST, true);
+        $request = $_SERVER['REQUEST_URI'];
         if (empty($this->log_file)) {
-            file::AppendFile(app_logpath . '' . date("Y-m-d") . '.log', time::FormatTimestamp(time::CurrentTimestamp(), DATE_ATOM) . " - " . $message . "\r\n");
+            file::AppendFile(app_logpath . '' . date("Y-m-d") . '.log', time::FormatTimestamp(time::CurrentTimestamp(), DATE_ATOM) . " - " . $request . " - " . $message . "" . $postdata . "\r\n");
         } else {
-            file::AppendFile($this->log_file, time::FormatTimestamp(time::CurrentTimestamp(), DATE_ATOM) . " - " . $message . "\r\n");
+            file::AppendFile($this->log_file, time::FormatTimestamp(time::CurrentTimestamp(), DATE_ATOM) . " - " . $request . " - " . $message . "" . $postdata . "\r\n");
         }
     }
 
