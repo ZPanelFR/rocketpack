@@ -103,6 +103,15 @@
         `so_comment_tx` text,
         PRIMARY KEY (`so_name_vc`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+    DROP TABLE IF EXISTS `t_user`;
+    CREATE TABLE `t_user` (
+        `us_id_pk` int(11) NOT NULL,
+        `us_user_vc` varchar(20) DEFAULT NULL,
+        `us_pass_vc` varchar(45) DEFAULT NULL,
+        `us_email_vc` varchar(150) DEFAULT NULL,
+    PRIMARY KEY (`us_id_pk`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         </pre>
         <% end %>
     </p>
