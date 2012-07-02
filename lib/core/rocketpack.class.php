@@ -34,6 +34,14 @@ class rocketpack {
         return $logger;
     }
 
+    /**
+     * A very simple way to access User details and options for user athentication. 
+     */
+    protected function User() {
+        $user = new user();
+        return $user;
+    }
+
 }
 
 ?>

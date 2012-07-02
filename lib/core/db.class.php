@@ -165,17 +165,6 @@ class db extends PDO {
         return $this->run($sql, $bind);
     }
 
-    public function bindQuery($sqlString, $bindArray, $driver_options = array()) {
-        $safeQuery = $this->prepare($sqlString, $driver_options);
-        foreach ($bindArray as $bindKey => &$bindValue) {
-            $safeQuery->bindParam($bindKey, $bindValue);
-        }
-        $rowCount = $safeQuery->rowCount();
-        $safeQuery->execute();
-        $resultRows = $safeQuery->fetchAll();
-        return $resultRows;
-    }
-
 }
 
 ?>

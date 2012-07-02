@@ -6,8 +6,8 @@ class user extends rocketpack {
      * Checks to see if the user is logged in by checking if the 'rpuid' session is set.
      * @return boolean 
      */
-    public static function GetIsLoggedIn() {
-        if (isset($_SESSION['rpuid']) && $_SESSION['rpuid'] != '')
+    public function IsLoggedIn() {
+        if (isset($_SESSION['rpuid']) && $_SESSION['rpuid'] != null)
             return true;
         return false;
     }
@@ -17,11 +17,12 @@ class user extends rocketpack {
      * @param string $redirectcontroller The name of the 'login' or 'login required' controller to redirect the user too on a failed login attempt.
      * @return boolean 
      */
-    public static function SetIsRequired($redirectcontroller) {
-        if (self::IsLoggedIn())
+    public function IsRequired($redirectcontroller, $notice = null) {
+        if ($this->IsLoggedIn())
             return true;
         notice::ResetNotice();
-        notice::StoreNotice("You are required to login to access that area, please login to continue..");
+        if ($notice != null)
+            notice::StoreNotice($notice);
         header("location: " . link::build($redirectcontroller) . "");
         exit;
     }
@@ -31,34 +32,37 @@ class user extends rocketpack {
      * @param int $uid The user ID to set the logged in user as.
      * @return boolean 
      */
-    public static function RegisterSesion($uid) {
+    public function RegisterSession($uid) {
         $_SESSION['rpuid'] = $uid;
         return true;
     }
 
     /**
-     * A static function to 'destory' the user's session.
+     * Destory the user's session.
      * @return boolean 
      */
-    public static function DestroySesion() {
+    public function DestroySession() {
         $_SESSION['rpuid'] = null;
         return true;
     }
 
     /**
-     * A static function to return the details of the logged in user.
+     * Return the details of the logged in user.
      * @return array Table data from the t_user table for the current logged-in user. 
      */
-    public static function GetDetails() {
-        $user = $this->Database()->select("t_user", "us_id_pk = " . self::GetLoggedInUserID() . "");
-        return $user;
+    public function Details() {
+        $bind = array(
+            ":uid" => $this->ID(),
+        );
+        $user = $this->Database()->select('t_user', 'us_id_pk = :uid',$bind);
+        return $user[0];
     }
 
     /**
      * Returns the current UID of the logged-in user.
      * @return int 
      */
-    public static function GetID() {
+    public function ID() {
         return $_SESSION['rpuid'];
     }
 
