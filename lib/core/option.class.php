@@ -8,7 +8,10 @@ class option extends rocketpack {
      * @return type 
      */
     public function GetSetting($name) {
-        $setting = $this->Database()->select("t_setting", "so_name_vc='" . $name . "'", "", "so_value_tx");
+        $bind = array(
+            ":name" => $name,
+        );
+        $setting = $this->Database()->select("t_setting", "so_name_vc=:name", "", "so_value_tx", $bind);
         return $setting[0]['so_value_tx'];
     }
 
@@ -19,9 +22,13 @@ class option extends rocketpack {
      * @return type 
      */
     public function SetSetting($name, $value) {
+        $bind = array(
+            ":name" => $name,
+            ":value" => $value,
+        );
         $setting = $this->Database()->update("t_setting", array(
             "so_value_tx" => $value,
-                ), "so_name_vc = '" . $name . "'");
+                ), "so_name_vc = :name", $bind);
         return $setting;
     }
 
