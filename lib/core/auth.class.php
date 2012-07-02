@@ -24,7 +24,7 @@ class auth extends rocketpack {
      * @return boolean 
      */
     public function Logout() {
-        if (!user::GetIsLoggedIn())
+        if (!$this->User()->GetIsLoggedIn())
             return false;
         user::DestroySesion();
         return true;
