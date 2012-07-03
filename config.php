@@ -16,7 +16,7 @@ define('app_db_pass', '');
 
 define('app_urlrewrite', false); // If not used, URL parameters will be used instead.
 define('app_dbsessions', false); // Use the rocketpack database for storage of session infomation?
-define('app_salt', 'put your unique phrase/key here');
+define('app_salt', 'put your unique phrase/key here'); // Any hashing done by the framwork will automatically 'salt' with this key to protect against md5 dictionary attacks etc.
 
 define('app_cachepath', 'cache/');
 define('app_logpath', 'log/');
