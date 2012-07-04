@@ -53,6 +53,15 @@ class hash {
     public static function RandomSHA1Hash() {
         return sha1(microtime());
     }
+    
+    /**
+     * A 'super' hash comprises of several MD5 and SHA1 passes including the application salt. 
+     * @param string $string The string to hash.
+     * @return string The output of the hash.
+     */
+    public static function SuperHash($string){
+        return md5(sha1(md5(sha1($string.app_salt))));
+    }
 
 }
 
