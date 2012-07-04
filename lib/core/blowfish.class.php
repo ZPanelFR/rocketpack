@@ -16,9 +16,9 @@ class blowfish {
     $this->padding = $padding;
     $this->N = 16;
     $this->blockSize = 8;
-    $this->_applyKey($key);
+    $this->_ApplyKey($key);
     if ( ! empty($iv)) {
-      $this->IV = $this->_pad($iv);
+      $this->IV = $this->_Pad($iv);
     }
   }
 
@@ -33,7 +33,7 @@ class blowfish {
    * @return string Returns the encrypted string. It is recommended you base64encode this for storage.
    * @author Matt Harris
    **/
-  function encrypt($plaintext, $key, $mode=blowfish::BLOWFISH_MODE_CBC, $padding=blowfish::BLOWFISH_PADDING_RFC, $iv=NULL) {
+  function Encrypt($plaintext, $key, $mode=blowfish::BLOWFISH_MODE_CBC, $padding=blowfish::BLOWFISH_PADDING_RFC, $iv=NULL) {
     if ( $mode == blowfish::BLOWFISH_MODE_CBC and empty($iv) ) {
       throw new Exception('CBC Mode requires an IV key');
       return;
@@ -41,7 +41,7 @@ class blowfish {
     $ciphertext = '';
     $fish = new blowfish($key, $mode, $padding, $iv);
     $block = &$fish->blockSize;
-    $paded = $fish->_pad($plaintext);
+    $paded = $fish->_Pad($plaintext);
     $len = strlen($paded);
 
     # encrypt in 1 byte intervals
@@ -52,7 +52,7 @@ class blowfish {
       } else {
         list(, $xL, $xR) = unpack('N2', substr($paded, $i, $block));
       }
-      $fish->_encipher($xL, $xR);
+      $fish->_Encipher($xL, $xR);
       $ciphertext .= pack('N2', $xL, $xR);
     }
     unset($fish);
@@ -70,7 +70,7 @@ class blowfish {
    * @return string Returns the plaintext string.
    * @author Matt Harris
    **/
-  function decrypt($ciphertext, $key, $mode=blowfish::BLOWFISH_MODE_CBC, $padding=blowfish::BLOWFISH_PADDING_RFC, $iv=NULL) {
+  function Decrypt($ciphertext, $key, $mode=blowfish::BLOWFISH_MODE_CBC, $padding=blowfish::BLOWFISH_PADDING_RFC, $iv=NULL) {
     if ( $mode == blowfish::BLOWFISH_MODE_CBC and empty($iv) ) {
       throw new Exception('CBC Mode requires an IV key');
       return;
@@ -84,7 +84,7 @@ class blowfish {
     # encrypt in 1 byte intervals
     for ($i=0; $i < $len; $i+=$block) {
       list(, $xL, $xR) = unpack('N2', substr($ciphertext, $i, $block));
-      $fish->_decipher($xL, $xR);
+      $fish->_Decipher($xL, $xR);
       if ($mode == blowfish::BLOWFISH_MODE_CBC) {
         $chain = ($i == 0) ? $fish->IV : substr($ciphertext, $i - $block, $block);
         $plaintext .= (pack('N2', $xL, $xR) ^ $chain);
@@ -92,12 +92,12 @@ class blowfish {
         $plaintext .= pack('N2', $xL, $xR);
       }
     }
-    $plaintext = $fish->_unpad($plaintext);
+    $plaintext = $fish->_UnPad($plaintext);
     unset($fish);
     return $plaintext;
   }
 
-  function _applyKey($key) {
+  function _ApplyKey($key) {
     $this->P = defaultKey::$P;
     $this->S = defaultKey::$S;
 
@@ -118,14 +118,14 @@ class blowfish {
     $datar = 0x00000000;
     
     for ($i=0; $i < $this->N+2; $i+=2) { 
-      $this->_encipher($datal, $datar);
+      $this->_Encipher($datal, $datar);
       $this->P[$i] = $datal;
       $this->P[$i+1] = $datar;
     }
     
     for ($i=0; $i < 4; ++$i) {
       for ($j=0; $j < 256; $j+=2) { 
-        $this->_encipher($datal, $datar);
+        $this->_Encipher($datal, $datar);
         $this->S[$i][$j] = $datal;
         $this->S[$i][$j+1] = $datar;
       } 
@@ -149,7 +149,7 @@ class blowfish {
    * @return string Returns the plaintext string padded to block_size
    * @access private
    **/
-  function _pad($plaintext) {
+  function _Pad($plaintext) {
     $block = &$this->blockSize;
     $len = strlen($plaintext);
     $pad_len = ($len < $block) ? $block - $len : ($block - ( $len % $block )) % $block;
@@ -177,7 +177,7 @@ class blowfish {
    * @return string Returns the plaintext without the padding bytes
    * @access private
    **/
-  function _unpad($plaintext) {
+  function _UnPad($plaintext) {
     $block = &$this->blockSize;
     $pad_len = ord(substr($plaintext, -1, 1));
 
@@ -212,7 +212,7 @@ class blowfish {
    * blowfish enciphering algorithm
    * @access private
    */
-  function _encipher(&$xL, &$xR) {
+  function _Encipher(&$xL, &$xR) {
     $_xL = $xL;
     $_xR = $xR;
 
@@ -234,7 +234,7 @@ class blowfish {
    * blowfish deciphering algorithm
    * @access private
    */
-  function _decipher(&$xL, &$xR) {
+  function _Decipher(&$xL, &$xR) {
     $_xL = $xL;
     $_xR = $xR;
 
