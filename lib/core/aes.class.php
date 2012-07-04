@@ -188,11 +188,11 @@ class aes extends rocketpack {
 
         if ($this->mode != "ECB" && strlen($this->iv) != 16)
             $this->Log()->LogToFile('The initialization vector must be 128 bits (or 16 characters) long.');
-            die("The initialization vector must be 128 bits (or 16 characters) long.");
+            //die("The initialization vector must be 128 bits (or 16 characters) long.");
 
         if ($this->Nk != 4 && $this->Nk != 6 && $this->Nk != 8)
             $this->Log()->LogToFile('Key is ' . ($this->Nk * 32) . ' bits long. *not* 128, 192, or 256.');
-            die("Key is " . ($this->Nk * 32) . " bits long. *not* 128, 192, or 256.");
+            //die("Key is " . ($this->Nk * 32) . " bits long. *not* 128, 192, or 256.");
 
         $this->Nr = $this->Nk + self::$Nb + 2;
         $this->w = array(); // Nb*(Nr+1) 32-bit words
