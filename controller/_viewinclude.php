@@ -1,11 +1,13 @@
 <?php
 
 class _viewinclude extends rocketpack {
-    
-    public function outServerTime(){
+
+    var $minifycode = true;
+
+    public function outServerTime() {
         return date('d/m/Y');
     }
-    
+
 }
 
 ?>
