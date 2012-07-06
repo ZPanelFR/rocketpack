@@ -5,8 +5,8 @@
  */
 function __autoload($class_name) {
     if (isset($_GET['controller'])) {
-        if (file_exists("controller/" . $_GET['controller'] . ".php")) {
-            require_once "controller/" . $_GET['controller'] . ".php";
+        if (file_exists("app/controller/" . $_GET['controller'] . ".php")) {
+            require_once "app/controller/" . $_GET['controller'] . ".php";
         }
     }
     $class_string = '';

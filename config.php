@@ -23,7 +23,7 @@ define('app_logpath', 'log/');
 define('app_tmppath', 'tmp/');
 
 // The full CLASSPATH, Comma seperated class folders, the classes in these folder will be automatically loaded.
-define('app_classpath', 'model/,lib/core/,lib/vendor/,lib/vendor/phpMailer/');
+define('app_classpath', 'app/model/,vendor/,vendor/phpMailer/,lib/');
 
 // Set the application absolute path
 if (!defined('app_path'))

@@ -28,9 +28,9 @@ if (class_exists('' . $class . '')) {
     }
     // If its a GET request we'll continue to execute the template and MVC parser..
     if (isset($this_object->renderwith)) {
-        $raw = file::ReadFile("view/" . $this_object->renderwith . ".html");
+        $raw = file::ReadFile("app/view/" . $this_object->renderwith . ".html");
     } else {
-        $raw = file::ReadFile("view/" . $class . ".html");
+        $raw = file::ReadFile("app/view/" . $class . ".html");
     }
 
     $match = null;
@@ -47,7 +47,7 @@ if (class_exists('' . $class . '')) {
     $raw = preg_replace('/\<% if (.+?)\ %>/i', '<?php if(\$this_object->out$1()){ ?>', $raw);
     $raw = preg_replace('/\<% control (.+?)\ %>/i', "<?php foreach(\$this_object->out$1() as \$key => \$value){ ?>", $raw);
     $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
-    $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo ParseInclude(@file::ReadFile(\'view/\'.$1.\'.html\')); ?>', $raw);
+    $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo ParseInclude(@file::ReadFile(\'app/view/\'.$1.\'.html\')); ?>', $raw);
     $raw = preg_replace('/\<% public_path\ %>/i', '' . link::webfolder() . 'public/', $raw);
 
     // Multi part URL link generation.
@@ -76,8 +76,8 @@ function ParseInclude($raw) {
     preg_match_all("'<%=\s(.*?)\s%>'si", $raw, $match);
 
     if ($match) {
-        if (file_exists("controller/_viewinclude.php")) {
-            require_once "controller/_viewinclude.php";
+        if (file_exists("app/controller/_viewinclude.php")) {
+            require_once "app/controller/_viewinclude.php";
         }
         if (class_exists('_viewinclude')) {
             $tpl_controller = new _viewinclude();
@@ -94,7 +94,7 @@ function ParseInclude($raw) {
     $raw = preg_replace('/\<% if (.+?)\ %>/i', '<?php if(\$tpl_controller->out$1()){ ?>', $raw);
     $raw = preg_replace('/\<% control (.+?)\ %>/i', "<?php foreach(\$tpl_controller->out$1() as \$key => \$value){ ?>", $raw);
     $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
-    $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo @file::ReadFile(\'view/\'.$1.\'.html\'); ?>', $raw);
+    $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo @file::ReadFile(\'app/view/\'.$1.\'.html\'); ?>', $raw);
     $raw = preg_replace('/\<% public_path\ %>/i', '' . link::webfolder() . 'public/', $raw);
 
     // Multi part URL link generation.
