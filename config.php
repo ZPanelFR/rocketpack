@@ -5,7 +5,7 @@
  */
 
 // Default application controller
-define('app_defaultcontroller', 'index');
+define('app_defaultcontroller', 'launch');
 
 // Database connection settings (PDO)
 define('app_db_driver','mysql');
