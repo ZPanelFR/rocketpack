@@ -15,8 +15,8 @@ Getting started..
 -------------------
 Once you've grabbed your copy of RocketPack you need to make a few configuration changes to match your enviroment, these are as follows:-
 
-* Edit and customise your application settings in config.php, you may want to disable the use of mod_rewrite etc.
+* Edit and customise your application settings in config.php, you may want to enable the use of mod_rewrite etc.
 * If you are using RocketPack from a directory on your machine other than '/rocketpack/' you'll need to update the .htaccess file and set the correct RewriteBase path. Generally once you use RocketPack in a production enviroment you will have it hosted in the root of your domain, in this case you'd need to set the RewriteBase to '/' instead.
-* If using a Linux or UNIX based operating system you should set the appropriate directory settings on 'cache/', 'tmp/' and 'log/' to enable your web server of choice to be able to write to these directories.
-
-Thats it pretty much!
+* If using a Linux or UNIX based operating system you should set the appropriate directory permissions on 'cache/', 'tmp/' and 'log/' to enable your web server of choice to be able to write to these directories.
+* If you now access RocketPack from your browser like so: http://localhost/rocketpack/ you should now see a summary of things you may still need to do to finalise your applications enviroment (such as configure database connection, invalid permissions sets on folder etc.).
+* You can now empty out the default (example) controllers, models and views from the app/ directory and start developing your application. You may also want to change the 'default controller' option in config.php.
