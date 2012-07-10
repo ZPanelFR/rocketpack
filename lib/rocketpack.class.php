@@ -7,6 +7,7 @@ class rocketpack {
      */
     protected function Database() {
         $obj = new db("" . app_db_driver . ":host=" . app_db_host . ";dbname=" . app_db_name . "", "" . app_db_user . "", "" . app_db_pass . "");
+        $obj->setErrorCallbackFunction('echo');
         if (!$obj)
             return false;
         return $obj;
