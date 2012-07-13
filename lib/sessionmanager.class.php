@@ -32,7 +32,7 @@ class sessionmanager extends rocketpack {
     }
 
     public function read($id) {
-        $result = $this->Database()->select("t_session", "WHERE se_hash_vc = '$id'");
+        $result = $this->Database()->select("t_session", "se_hash_vc = '$id'");
         return $result[0]['se_data_tx'];
     }
 
