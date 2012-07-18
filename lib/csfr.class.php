@@ -32,9 +32,10 @@ class csfr {
      * @return boolean 
      */
     public function ValidateCSFRKey($submitted_key) {
-        if ($this->CSFRKeyStore()->Read('csfr_key') == $submitted_key)
-            return true;
-        return false;
+        if ($this->CSFRKeyStore()->Read('csfr_key') != $submitted_key)
+            return false;
+        $this->GenerateCSFRKey();
+        return true;
     }
 
     /**
@@ -58,7 +59,7 @@ class csfr {
      * @return boolean 
      */
     public function ValidateCSFRFormTag() {
-        if (isset($_POST['csfr_key']) && ($_POST['csfr_key'] == $this->CurrentCSFRKey()))
+        if (isset($_POST['csfr_key']) && ($this->ValidateCSFRKey($_POST['csfr_key'])))
             return true;
         return false;
     }
