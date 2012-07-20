@@ -23,7 +23,7 @@ class partialcache {
     }
 
     /**
-     * Confifgures the directory of where to store the cachefiles, if left default will use 'cache/' by default.
+     * Confifgures the directory of where to store the cache files, if left default will use 'cache/' by default.
      * @param string $var The full path including a trailing slash to the cache folder.
      */
     public function set_cache_dir($var = "cache/") {
