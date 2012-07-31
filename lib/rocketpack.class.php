@@ -2,12 +2,31 @@
 
 class rocketpack {
 
+    /**
+     * Stores the name of the current requested controller.
+     * @var string The name of the current controller.
+     */
     public $controller = null;
+
+    /**
+     * Stores the name of the requested 'action' (optional).
+     * @var string The name of the current 'action'. 
+     */
     public $action = null;
+
+    /**
+     * Stores an optional 'id', as either a string or int.
+     * @var string Value of the 'id' URL parameter. 
+     */
     public $id = null;
+
+    /**
+     * Stores an optional 'otherid', as either a string or int.
+     * @var string Value of the 'otherid' URL parameter. 
+     */
     public $otherid = null;
 
-    function __construct() {
+    public function __construct() {
         if (isset($_GET['controller'])) {
             $this->controller = $_GET['controller'];
         }
@@ -23,7 +42,7 @@ class rocketpack {
     }
 
     /**
-     * A very simple way to share the database handle across classes.
+     * A very simple way to access the configured RocketPack database.
      */
     protected function Database() {
         $obj = new db("" . app_db_driver . ":host=" . app_db_host . ";dbname=" . app_db_name . "", "" . app_db_user . "", "" . app_db_pass . "");
