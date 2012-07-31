@@ -2,10 +2,10 @@
 
 class rocketpack {
 
-    public $controller;
-    public $action;
-    public $id;
-    public $otherid;
+    public $controller = null;
+    public $action = null;
+    public $id = null;
+    public $otherid = null;
 
     function __construct() {
         if (isset($_GET['controller'])) {
