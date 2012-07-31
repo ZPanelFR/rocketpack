@@ -2,6 +2,26 @@
 
 class rocketpack {
 
+    public $controller;
+    public $action;
+    public $id;
+    public $otherid;
+
+    function __construct() {
+        if (isset($_GET['controller'])) {
+            $this->controller = $_GET['controller'];
+        }
+        if (isset($_REQUEST['action'])) {
+            $this->action = $_REQUEST['action'];
+        }
+        if (isset($_GET['id'])) {
+            $this->id = $_GET['id'];
+        }
+        if (isset($_GET['otherid'])) {
+            $this->otherid = $_GET['otherid'];
+        }
+    }
+
     /**
      * A very simple way to share the database handle across classes.
      */
