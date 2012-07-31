@@ -22,9 +22,12 @@ if (class_exists('' . $class . '')) {
             $simplecache->set_cache_life($this_object->cache_life);
         $simplecache->start_cache();
     }
-    // Lets run the form action, if the controller request was a 'post' request!
-    if (isset($_POST['do'])) {
-        return $this_object->$_POST['do']();
+    // Lets execute the class method if one exsits for the URL 'action' part.
+    if (isset($_REQUEST['action'])) {
+        $action_runner = $_REQUEST['action'];
+        if (method_exists($this_object, $action_runner)) {
+            return $this_object->$action_runner();
+        }
     }
     // If its a GET request we'll continue to execute the template and MVC parser..
     if (isset($this_object->renderwith)) {
