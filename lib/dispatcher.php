@@ -22,11 +22,11 @@ if (class_exists('' . $class . '')) {
             $simplecache->set_cache_life($this_object->cache_life);
         $simplecache->start_cache();
     }
-    // Lets execute the class method if one exsits for the URL 'action' part.
+    // Lets execute the class method (prefixed with 'action') if one exsits for the URL 'action' part.
     if (isset($_REQUEST['action'])) {
-        $action_runner = $_REQUEST['action'];
+        $action_runner = 'action' . $_REQUEST['action'];
         if (method_exists($this_object, $action_runner)) {
-            return $this_object->$action_runner();
+            $this_object->$action_runner();
         }
     }
     // If its a GET request we'll continue to execute the template and MVC parser..
