@@ -6,11 +6,18 @@ $app_routes = new route();
 /**
  * Add your application routes below!
  */
-$app_routes->AddRoute('/example/testroute', array(
+$app_routes->AddRoute('/example/hello', array(
     'controller' => 'tester',
-    'action' => 'Sayhello',
+    'action' => 'SayHello',
     'id' => '33',
     'otherid' => 'edit',
+));
+
+$app_routes->AddRoute('/example/goodbye', array(
+    'controller' => 'tester',
+    'action' => 'SayGoodbye',
+    'id' => '',
+    'otherid' => '',
 ));
 
 
