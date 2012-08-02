@@ -15,6 +15,15 @@ class route {
      * @return void
      */
     public function AddRoute($alias, $options) {
+        if (!isset($options['action'])) {
+            $options['action'] = null;
+        }
+        if (!isset($options['id'])) {
+            $options['id'] = null;
+        }
+        if (!isset($options['otherid'])) {
+            $options['otherid'] = null;
+        }
         array_push($this->routestack, array(
             'alias' => $alias,
             'controller' => $options['controller'],
@@ -25,7 +34,7 @@ class route {
     }
 
     /**
-     * Processes the registered routes.
+     * Processes the registered application routes.
      * @return void
      */
     public function ProcessRoutes() {
@@ -33,11 +42,17 @@ class route {
         $requestalias = str_ireplace($appbase[0], '', $_SERVER['REQUEST_URI']);
         if (count($this->routestack) > 0) {
             foreach ($this->routestack as $route) {
-                if ('/' . $requestalias == $route['alias']) {
+                if (('/' . $requestalias == $route['alias']) || ('/' . $requestalias == $route['alias'] . '/')) {
                     $_GET['controller'] = $route['controller'];
-                    $_REQUEST['action'] = $route['action'];
-                    $_GET['id'] = $route['id'];
-                    $_GET['otherid'] = $route['otherid'];
+                    if (isset($route['action'])) {
+                        $_REQUEST['action'] = $route['action'];
+                    }
+                    if (isset($route['id'])) {
+                        $_GET['id'] = $route['id'];
+                    }
+                    if (isset($route['otherid'])) {
+                        $_GET['otherid'] = $route['otherid'];
+                    }
                 }
             }
         }

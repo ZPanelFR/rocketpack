@@ -16,8 +16,6 @@ $app_routes->AddRoute('/example/hello', array(
 $app_routes->AddRoute('/example/goodbye', array(
     'controller' => 'tester',
     'action' => 'SayGoodbye',
-    'id' => '',
-    'otherid' => '',
 ));
 
 
