@@ -9,16 +9,28 @@ function __autoload($class_name) {
             require_once "app/controller/" . $_GET['controller'] . ".php";
         }
     }
-    $class_string = '';
     $class_paths = explode(",", app_classpath);
     foreach ($class_paths as $value) {
-        $class_string = $value . '/' . $class_name . '.class.php';
-        if (file_exists($class_string)) {
-            require_once $class_string;
-        }
+        $count = 0;
+        RecurseClassDirectories($value, $class_name, $count);
     }
 }
 
-
+/**
+ * Iterates through the class directories to enable cleaner storage of classes.
+ */
+function RecurseClassDirectories($main, $class_name, $count) {
+    $directoryhandle = opendir($main);
+    while ($file = readdir($directoryhandle)) {
+        if (is_dir($file) && $file != '.' && $file != '..') {
+            recurseDirs($file);
+        } else {
+            $count++;
+            if (file_exists($main . $class_name . '.class.php')) {
+                require_once $main . $class_name . '.class.php';
+            }
+        }
+    }
+}
 
 ?>
