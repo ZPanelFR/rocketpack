@@ -11,24 +11,19 @@ function __autoload($class_name) {
     }
     $class_paths = explode(",", app_classpath);
     foreach ($class_paths as $value) {
-        $count = 0;
-        RecurseClassDirectories($value, $class_name, $count);
+        IterateClassDirs($value, $class_name);
     }
 }
 
 /**
- * Iterates through the class directories to enable cleaner storage of classes.
+ * Iterates through the class directories to enable cleaner storage of classes by enabling nesting class folders.
  */
-function RecurseClassDirectories($main, $class_name, $count) {
-    $directoryhandle = opendir($main);
-    while ($file = readdir($directoryhandle)) {
-        if (is_dir($file) && $file != '.' && $file != '..') {
-            recurseDirs($file);
-        } else {
-            $count++;
-            if (file_exists($main . $class_name . '.class.php')) {
-                require_once $main . $class_name . '.class.php';
-            }
+function IterateClassDirs($main, $class_name) {
+    $di = new RecursiveDirectoryIterator($main);
+    foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
+        if ($class_name == str_replace('.class.php', '', basename($file))) {
+            require_once $file;
+            break;
         }
     }
 }
