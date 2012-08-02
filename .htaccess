@@ -4,9 +4,8 @@ RewriteBase /rocketpack/
 RewriteRule ^(public)(/.*)?$ - [L] # List of Directories to ignore! (Seperated with a pipe '|' character eg. (public|example|another).)
 RewriteCond %{REQUEST_URI} !index.php
 RewriteRule ^([^/]+)/?$ index.php?controller=$1 [L]
-RewriteCond %{REQUEST_URI} !index.php
 RewriteRule ^([^/]+)/([^/]+)/?$ index.php?controller=$1&action=$2 [L]
-RewriteCond %{REQUEST_URI} !index.php
 RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?$ index.php?controller=$1&action=$2&id=$3 [L]
-RewriteCond %{REQUEST_URI} !index.php
 RewriteRule ^([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ index.php?controller=$1&action=$2&id=$3&otherid=$4 [L]
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ index.php?controller=$1&action=$2&id=$3&otherid=$4 [L]
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/([^/]+)/(.*)?$ index.php?controller=$1&action=$2&id=$3&otherid=$4$5 [L]
