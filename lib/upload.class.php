@@ -74,13 +74,13 @@ class upload extends rocketpack {
                         return true;
                     }
                     $this->Log()->LogToFile('Invalid file extension. Allowed extensions are ' . $this->allowedExt);
-                    notice::ResetWarning();
-                    notice::StoreWarning('Invalid file extension. Allowed extensions are ' . $this->allowedExt);
+                    notification::ResetWarning();
+                    notification::StoreWarning('Invalid file extension. Allowed extensions are ' . $this->allowedExt);
                     return false;
                 }
                 $this->Log()->LogToFile('Sorry but there is an error in our server. Please try again later.');
-                notice::ResetWarning();
-                notice::StoreWarning('Sorry but there is an error in our server. Please try again later.');
+                notification::ResetWarning();
+                notification::StoreWarning('Sorry but there is an error in our server. Please try again later.');
                 return false;
             } else {
                 if ($this->maxSize < 1000000) {
@@ -91,13 +91,13 @@ class upload extends rocketpack {
                     $rsi = round($this->maxSize / 1000000000, 2) . ' Gb';
                 }
                 $this->Log()->LogToFile('File is too big. Maximum allowed size is ' . $rsi);
-                notice::ResetWarning();
-                notice::StoreWarning('File is too big. Maximum allowed size is ' . $rsi);
+                notification::ResetWarning();
+                notification::StoreWarning('File is too big. Maximum allowed size is ' . $rsi);
                 return false;
             }
         }
-        notice::ResetWarning();
-        notice::StoreWarning('An unexpected error has occured, please try again later!');
+        notification::ResetWarning();
+        notification::StoreWarning('An unexpected error has occured, please try again later!');
         return false;
     }
 
@@ -111,8 +111,8 @@ class upload extends rocketpack {
     public function Upload($name, $dir, $fname = false) {
         if (!is_dir($dir)) {
             $this->Log()->LogToFile('Sorry but there is an error in our server. Please try again later.');
-            notice::ResetWarning();
-            notice::StoreWarning('Sorry but there is an error in our server. Please try again later.');
+            notification::ResetWarning();
+            notification::StoreWarning('Sorry but there is an error in our server. Please try again later.');
             return false;
         }
         if ($this->Check($name)) {
@@ -128,8 +128,8 @@ class upload extends rocketpack {
                 return true;
             } else {
                 $this->Log()->LogToFile('The file could not be uploaded, although everything went ok  ... Please try again later.');
-                notice::ResetWarning();
-                notice::StoreWarning('The file could not be uploaded, although everything went ok  ... Please try again later.');
+                notification::ResetWarning();
+                notification::StoreWarning('The file could not be uploaded, although everything went ok  ... Please try again later.');
                 return false;
             }
         } else {

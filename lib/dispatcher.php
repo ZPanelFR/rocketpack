@@ -66,8 +66,8 @@ if (class_exists('' . $class . '')) {
     }
 
     echo eval('?>' . $raw);
-    notice::ResetNotice();
-    notice::ResetWarning();
+    notification::ResetNotice();
+    notification::ResetWarning();
 } else {
     header("HTTP/1.0 404 Not Found");
     echo "<h1>Sorry no controller found for '" . $_GET['controller'] . "'.</h1>";

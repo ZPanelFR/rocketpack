@@ -20,9 +20,9 @@ class user extends rocketpack {
     public function IsRequired($redirectcontroller, $notice = null) {
         if ($this->IsLoggedIn())
             return true;
-        notice::ResetNotice();
+        notification::ResetNotice();
         if ($notice != null)
-            notice::StoreNotice($notice);
+            notification::StoreNotice($notice);
         header("location: " . link::build($redirectcontroller) . "");
         exit;
     }

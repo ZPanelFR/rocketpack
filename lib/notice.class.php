@@ -1,6 +1,6 @@
 <?php
 
-class notice {
+class notification {
 
     /**
      * Stores a new 'success' message that will appear on the screen.
