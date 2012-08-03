@@ -29,6 +29,23 @@
  */
 
 /**
+ * Example usage:-
+ * 
+ * $rss = new rss;
+ *
+ * // setup transparent cache
+ * $rss->cache_dir = './cache';
+ * $rss->cache_time = 3600; // one hour
+ *
+ * if ($rs = $rss->get('URL of some RSS file')) {
+ * // here we can work with RSS fields
+ * // Can see variable by var_dump($rs);
+ * } else {
+ * die ('Error: RSS file not found...');
+ * }
+ */
+
+/**
  * lastRSS
  * Simple yet powerfull PHP class to parse RSS files.
  */
@@ -54,7 +71,7 @@ class rss {
     // -------------------------------------------------------------------
     // Parse RSS file and returns associative array.
     // -------------------------------------------------------------------
-    function Get($rss_url) {
+    public function Get($rss_url) {
         // If CACHE ENABLED
         if ($this->cache_dir != '') {
             $cache_file = $this->cache_dir . '/rsscache_' . md5($rss_url);
@@ -91,7 +108,7 @@ class rss {
     // Modification of preg_match(); return trimed field with index 1
     // from 'classic' preg_match() array output
     // -------------------------------------------------------------------
-    function my_preg_match($pattern, $subject) {
+    private function my_preg_match($pattern, $subject) {
         // start regullar expression
         preg_match($pattern, $subject, $out);
 
@@ -119,7 +136,7 @@ class rss {
     // -------------------------------------------------------------------
     // Replace HTML entities &something; by real characters
     // -------------------------------------------------------------------
-    function unhtmlentities($string) {
+    private function unhtmlentities($string) {
         // Get HTML entities table
         $trans_tbl = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);
         // Flip keys<==>values
@@ -134,7 +151,7 @@ class rss {
     // Parse() is private method used by Get() to load and parse RSS file.
     // Don't use Parse() in your scripts - use Get($rss_file) instead.
     // -------------------------------------------------------------------
-    function Parse($rss_url) {
+    private function Parse($rss_url) {
         // Open and load RSS file
         if ($f = @fopen($rss_url, 'r')) {
             $rss_content = '';
