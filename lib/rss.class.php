@@ -60,6 +60,7 @@ class rss {
     var $items_limit = 0;
     var $stripHTML = False;
     var $date_format = '';
+    var $cache_dir = '';
     // -------------------------------------------------------------------
     // Private variables
     // -------------------------------------------------------------------
