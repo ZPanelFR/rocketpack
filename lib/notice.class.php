@@ -3,6 +3,41 @@
 class notice {
 
     /**
+     * Stores a new 'success' message that will appear on the screen.
+     * @param string $message The text message to show.
+     * @return boolean 
+     */
+    public static function StoreSuccess($message) {
+        $_SESSION['msg_success'] .= "<p>" . $message . "</p>";
+        return true;
+    }
+
+    /**
+     * Retrieves the 'success' message contents.
+     * @return string 
+     */
+    public static function RetrieveSuccess() {
+        return $_SESSION['msg_success'];
+    }
+
+    /**
+     * Checks to see if a 'success' is held in the server.
+     * @return boolean 
+     */
+    public static function CheckHasSuccess() {
+        if (isset($_SESSION['msg_success']) && !empty($_SESSION['msg_success']))
+            return true;
+        return false;
+    }
+
+    /**
+     * Removes the current 'success' text to disable it showing on the next page view. 
+     */
+    public static function ResetSuccess() {
+        $_SESSION['msg_success'] = '';
+    }
+
+    /**
      * Stores a new 'notice' message that will appear on the screen.
      * @param string $message The text message to show.
      * @return boolean 
