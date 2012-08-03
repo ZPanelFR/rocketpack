@@ -37,21 +37,37 @@ class notice {
         $_SESSION['msg_notice'] = '';
     }
 
+    /**
+     * Stores a new 'warning' message that will appear on the screen.
+     * @param string $message The text message to show.
+     * @return boolean 
+     */
     public static function StoreWarning($message) {
         $_SESSION['msg_warning'] .= "<p>" . $message . "</p>";
         return true;
     }
 
+    /**
+     * Retrieves the 'warning' message contents.
+     * @return string 
+     */
     public static function RetrieveWarning() {
         return $_SESSION['msg_warning'];
     }
 
+    /**
+     * Checks to see if a 'warning' is held in the server.
+     * @return boolean 
+     */
     public static function CheckHasWarning() {
         if (isset($_SESSION['msg_warning']) && !empty($_SESSION['msg_warning']))
             return true;
         return false;
     }
 
+    /**
+     * Removes the current 'warning' text to disable it showing on the next page view. 
+     */
     public static function ResetWarning() {
         $_SESSION['msg_warning'] = '';
     }
