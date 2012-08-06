@@ -40,7 +40,14 @@ if (class_exists('' . $class . '')) {
     preg_match_all("'<%=\s(.*?)\s%>'si", $raw, $match);
     if ($match) {
         foreach ($match[1] as $method) {
-            $raw = str_replace("<%= " . $method . " %>", call_user_func(array($this_object, "out" . $method)), $raw);
+            if (!stristr($method, '.')) {
+                $raw = str_replace("<%= " . $method . " %>", call_user_func(array($this_object, "out" . $method)), $raw);
+            } else {
+                $namespace = explode('.', $method);
+                $run_method = $namespace[0];
+                $method_array = call_user_func(array($this_object, "out" . $run_method));
+                $raw = str_replace("<%= " . $method . " %>", $method_array[$namespace[1]], $raw);
+            }
         }
     }
     $raw = str_replace('?>', ']', $raw);
@@ -86,7 +93,14 @@ function ParseInclude($raw) {
             $tpl_controller = new _viewinclude();
 
             foreach ($match[1] as $method) {
-                $raw = str_replace("<%= " . $method . " %>", call_user_func(array($tpl_controller, "out" . $method)), $raw);
+                if (!stristr($method, '.')) {
+                    $raw = str_replace("<%= " . $method . " %>", call_user_func(array($tpl_controller, "out" . $method)), $raw);
+                } else {
+                    $namespace = explode('.', $method);
+                    $run_method = $namespace[0];
+                    $method_array = call_user_func(array($tpl_controller, "out" . $run_method));
+                    $raw = str_replace("<%= " . $method . " %>", $method_array[$namespace[1]], $raw);
+                }
             }
         }
     }
