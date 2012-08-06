@@ -67,9 +67,7 @@ if (class_exists('' . $class . '')) {
     $raw = preg_replace('/\<% link_to {:controller=(.+?)}\ %>/i', '<?php echo link::build(\'$1\'); ?>', $raw);
 
     if (isset($this_object->minifycode) && $this_object->minifycode == TRUE) {
-        $raw = str_replace("\n", "", $raw);
-        $raw = str_replace("\t", "", $raw);
-        $raw = str_replace("\r", "", $raw);
+        $raw = preg_replace(array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'), array('>', '<', '\\1'), $raw);
     }
 
     echo eval('?>' . $raw);
@@ -121,9 +119,7 @@ function ParseInclude($raw) {
     $raw = preg_replace('/\<% link_to {:controller=(.+?)}\ %>/i', '<?php echo link::build(\'$1\'); ?>', $raw);
 
     if (isset($tpl_controller->minifycode) && $tpl_controller->minifycode == TRUE) {
-        $raw = str_replace("\n", "", $raw);
-        $raw = str_replace("\t", "", $raw);
-        $raw = str_replace("\r", "", $raw);
+        $raw = preg_replace(array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'), array('>', '<', '\\1'), $raw);
     }
 
     return eval('?>' . $raw);
