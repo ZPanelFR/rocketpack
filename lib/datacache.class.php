@@ -76,9 +76,13 @@ class datacache {
      * @param array $value The data to save to the cache file.
      */
     protected function save_cache($value) {
-
+        if (!is_array($value)) {
+            $towrite = array('string', $value);
+        } else {
+            $towrite = $value;
+        }
         $fp = @fopen($this->cache_filename(), 'w');
-        @fwrite($fp, json::ArrayToJSON($value));
+        @fwrite($fp, json::ArrayToJSON($towrite));
         @fclose($fp);
     }
 
@@ -92,7 +96,7 @@ class datacache {
             return $this->read_cache();
             exit();
         } else {
-            $this->save_cache($data);    
+            $this->save_cache($data);
             return $this->read_cache();
         }
     }
