@@ -12,6 +12,9 @@ define('app_defaultcontroller', 'launch');
 // error controller.
 define('app_defaultcontrollernotfound', '');
 
+// Application mode, If set to 'prod' no PHP errors will be shown and only non certain errors/notices will be logged to the Log directory (app_logpath)
+define('app_debugmode', 'dev');
+
 // Database connection settings (PDO)
 define('app_db_driver', 'mysql');
 define('app_db_host', 'localhost');
