@@ -5,9 +5,8 @@ require 'app/config/app.php';
 if (!defined('app_path'))
     define('app_path', dirname(__FILE__) . '/');
 
-
-ini_set('error_log', app_logpath . 'php_errors.log');
 if (app_debugmode != 'prod') {
+    ini_set('error_log', app_logpath . 'php_errors.log');
     error_reporting(E_ALL);
     ini_set('log_errors', 0);
     ini_set('display_errors', 1);
