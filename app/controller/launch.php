@@ -2,6 +2,11 @@
 
 class launch extends rocketpack {
 
+    //var $renderwith = "mytpl" // An example way to customise what template file (.html) to render the controller with (in this case mytpl.html), if not set it will look for a template with the same name as the class eg. launch.html 
+    //var $minifycode = true;   // Removes tab characters, whitespace and new lines from the generated page source code for performance reasons.
+    //var $cache = true;        // Enable page caching? - Great for CMSes as it caches the entire page, on my dynamic pages we recommend data caching instead of full page cache, use the datacache() class instead.
+    //var $cache_life = 30;     // Total amount of time (seconds) to keep a full cahced version of this file.
+
     public function outPathLogs() {
         return app_logpath;
     }
@@ -83,8 +88,8 @@ class launch extends rocketpack {
             return true;
         return false;
     }
-    
-    public function outPHPVersion(){
+
+    public function outPHPVersion() {
         return PHP_VERSION;
     }
 
