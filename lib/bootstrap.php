@@ -1,6 +1,13 @@
 <?php
 
 /**
+ * Forces the server to use UTC time if the server hasn't had its timezone set, PHP 5.3 is fussy like that!
+ */
+if (@date_default_timezone_set(date_default_timezone_get()) === false) {
+    date_default_timezone_set('UTC');
+}
+
+/**
  * The class auto-loader.
  */
 function __autoload($class_name) {
