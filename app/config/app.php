@@ -3,12 +3,17 @@
 /**
  * RocketPack Configuration File
  */
-
 // Default application controller
 define('app_defaultcontroller', 'launch');
 
+// Default application controller upon requesting an non-existent controller (basically a 404 error)
+// Be aware that setting this to a non-existent controller WILL cause a constant application loop!
+// If this is not set, a default HTML message will be shown instead of redirecting the user to a custom
+// error controller.
+define('app_defaultcontrollernotfound', '');
+
 // Database connection settings (PDO)
-define('app_db_driver','mysql');
+define('app_db_driver', 'mysql');
 define('app_db_host', 'localhost');
 define('app_db_name', 'rocketpack');
 define('app_db_user', 'root');
@@ -24,5 +29,4 @@ define('app_tmppath', 'tmp/');
 
 // The full CLASSPATH, Comma seperated class folders, the classes in these folder will be automatically loaded.
 define('app_classpath', 'app/model/,vendor/,vendor/phpMailer/,lib/');
-
 ?>
