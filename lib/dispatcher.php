@@ -73,7 +73,7 @@ if (class_exists('' . $class . '')) {
             }
         }
     }
-    $raw = str_replace('?>', ']', $raw);
+    $raw = str_replace('/s?>', ']', $raw);
     $raw = str_replace('<?php', 'PHP execution is not permitted! Caught: [', $raw);
     $raw = str_replace('<% else %>', '<?php } else { ?>', $raw);
     $raw = str_replace('<% end %>', '<?php } ?>', $raw);
