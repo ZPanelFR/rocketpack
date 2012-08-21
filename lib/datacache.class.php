@@ -46,7 +46,7 @@ class datacache {
      * Checks if a valid cache file exists.
      * @return boolean 
      */
-    protected function cache_exists() {
+    private function cache_exists() {
         if (@file_exists($this->cache_filename()) && time() - $this->cache_time < @filemtime($this->cache_filename())) {
             return true;
         } else {
@@ -98,6 +98,18 @@ class datacache {
         } else {
             $this->save_cache($data);
             return $this->read_cache();
+        }
+    }
+
+    /**
+     * Flushes the cache (deletes the cache file) to cause it to rebuild upon next load.
+     * @return boolean
+     */
+    public function flush_cache() {
+        if (file_exists($this->cache_filename())) {
+            return unlink($this->cache_filename());
+        } else {
+            return false;
         }
     }
 
