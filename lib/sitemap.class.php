@@ -17,7 +17,7 @@ class sitemap {
      */
     public function AddURL($loc, $lastmod = '', $changefreq = '', $priority = 0.5) {
         return array_push($this->urls, array(
-                    'loc' => $loc,
+                    'loc' => htmlentities($loc),
                     'lastmod' => $lastmod,
                     'changefreq' => $changefreq,
                     'priority' => $priority,
@@ -55,7 +55,7 @@ class sitemap {
             $xml .= "</url>\r";
         }
         $xml .= "</urlset>";
-        return $xml;
+        return utf8_encode($xml);
     }
 
 }
