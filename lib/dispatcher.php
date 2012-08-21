@@ -52,6 +52,13 @@ if (class_exists('' . $class . '')) {
         }
     }
 
+    // Set the pulic path variable, if a CDN path has been set it will use this instead of the default 'public/*' path.
+    if (app_cdnpath != '') {
+        $public_path = app_cdnpath;
+    } else {
+        $public_path = link::webfolder();
+    }
+
     $match = null;
     preg_match_all("'<%=\s(.*?)\s%>'si", $raw, $match);
     if ($match) {
@@ -74,7 +81,7 @@ if (class_exists('' . $class . '')) {
     $raw = preg_replace('/\<% control (.+?)\ %>/i', "<?php foreach(\$this_object->out$1() as \$key => \$value){ ?>", $raw);
     $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
     $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo ParseInclude(@file::ReadFile(\'app/view/\'.$1.\'.html\')); ?>', $raw);
-    $raw = preg_replace('/\<% public_path\ %>/i', '' . link::webfolder() . 'public/', $raw);
+    $raw = preg_replace('/\<% public_path\ %>/i', '' . $public_path . 'public/', $raw);
 
     // Multi part URL link generation.
     $raw = preg_replace('/\<% link_to {:controller=(.+?) :action=(.+?) :id=(.+?) :otherid=(.+?)}\ %>/i', '<?php echo link::build(\'$1\',\'$2\',\'$3\',\'$4\'); ?>', $raw);
@@ -129,7 +136,7 @@ function ParseInclude($raw) {
     $raw = preg_replace('/\<% control (.+?)\ %>/i', "<?php foreach(\$tpl_controller->out$1() as \$key => \$value){ ?>", $raw);
     $raw = preg_replace('/\<%@ (.+?)\ %>/i', '<?php echo \$value[\'$1\']; ?>', $raw);
     $raw = preg_replace('/\<% include (.+?)\ %>/i', '<?php echo @file::ReadFile(\'app/view/\'.$1.\'.html\'); ?>', $raw);
-    $raw = preg_replace('/\<% public_path\ %>/i', '' . link::webfolder() . 'public/', $raw);
+    $raw = preg_replace('/\<% public_path\ %>/i', '' . $public_path . 'public/', $raw);
 
     // Multi part URL link generation.
     $raw = preg_replace('/\<% link_to {:controller=(.+?) :action=(.+?) :id=(.+?) :otherid=(.+?)}\ %>/i', '<?php echo link::build(\'$1\',\'$2\',\'$3\',\'$4\'); ?>', $raw);
