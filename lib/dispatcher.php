@@ -36,6 +36,22 @@ if (class_exists('' . $class . '')) {
         $raw = file::ReadFile("app/view/" . $class . ".html");
     }
 
+    if (headers_sent())
+        die('Headers Sent');
+    // Check for a custom content type from the controller and if so lets set the header.
+    if (isset($this_object->contenttype)) {
+        header("Content-type: " . $this_object->contenttype . "");
+    }
+
+    // Lets go through and complete any further custom headers.
+    if (isset($this_object->headers)) {
+        if (is_array($this_object->headers)) {
+            foreach ($this_object->headers as $customheader) {
+                header($customheader);
+            }
+        }
+    }
+
     $match = null;
     preg_match_all("'<%=\s(.*?)\s%>'si", $raw, $match);
     if ($match) {
