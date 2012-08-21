@@ -1,90 +1,68 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset='utf-8'>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>RocketPack by bobsta63</title>
+  </head>
 
-  <title>bobsta63/rocketpack @ GitHub</title>
+  <body>
+    <div id="container">
+      <div class="inner">
 
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #f1f1f1;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #676767;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #3eef89; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #3eef89; }
-    h3 { text-align: center; color: #3eef89; }
-    a { color: #3eef89; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
-</head>
+        <header>
+          <h1>RocketPack</h1>
+          <h2>RocketPack is a simple, light-weight, easy to learn and code on PHP MVC framework that aims to help you build robust, secure and stable web applications in very little time!</h2>
+        </header>
 
-<body>
-  <a href="https://github.com/bobsta63/rocketpack"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/bobsta63/rocketpack/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/bobsta63/rocketpack/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/bobsta63/rocketpack" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
 
-  <div id="container">
+        <hr>
 
-    <div class="download">
-      <a href="https://github.com/bobsta63/rocketpack/zipball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
-      <a href="https://github.com/bobsta63/rocketpack/tarball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
+        <section id="main_content">
+          <h2>What is RocketPack?</h2>
+
+<p>RocketPack is a simple, light-weight, easy to learn and code-on PHP MVC framework that aims to help you build robust, secure and stable web applications in very little time!</p>
+
+<p><img src="http://ballen.co.uk/rocketpack_logo.png" alt="RocketPack Logo" title="RocketPack Logo"></p>
+
+<h2>Why RocketPack was developed</h2>
+
+<p>RocketPack was developed by myself, Bobby Allen (<a href="mailto:bobbyallen.uk@gmail.com">bobbyallen.uk@gmail.com</a>) mainly for my own personal use, I do a lot of PHP development and believe that by developing a single PHP framework I could save hundreds of hours a year by not having to re-write code!</p>
+
+<p>I recently played with Ruby on Rails, I loved 'most' of the ways it works but I felt some of it was too simple and some of the syntax I felt didn't always follow suit and make sense although most of the time it did. I also feel that PHP is the future, I prefer working with PHP as firstly it is my first proper web application language but also as PHP is ran on most of the worlds web servers I personally believe it makes sense! Ruby on Rails is a pain to setup correctly and to have it hosted requires a little more than your normal web host generally offers.</p>
+
+<h2>Getting started..</h2>
+
+<p>Once you've grabbed your copy of RocketPack you need to make a few configuration changes to match your enviroment, these are as follows:-</p>
+
+<ul>
+<li>Edit and customise your application settings in config.php, you may want to enable the use of mod_rewrite etc.</li>
+<li>If you are using RocketPack from a directory on your machine other than '/rocketpack/' you'll need to update the .htaccess file and set the correct RewriteBase path. Generally once you use RocketPack in a production enviroment you will have it hosted in the root of your domain, in this case you'd need to set the RewriteBase to '/' instead.</li>
+<li>If using a Linux or UNIX based operating system you should set the appropriate directory permissions on 'cache/', 'tmp/' and 'log/' to enable your web server of choice to be able to write to these directories.</li>
+<li>If you now access RocketPack from your browser like so: http://localhost/rocketpack/ you should now see a summary of things you may still need to do to finalise your applications enviroment (such as configure database connection, invalid permissions sets on folder etc.).</li>
+<li>You can now empty out the default (example) controllers, models and views from the app/ directory and start developing your application. You may also want to change the 'default controller' option in config.php.</li>
+</ul>
+        </section>
+
+        <footer>
+          RocketPack is maintained by <a href="https://github.com/bobsta63">bobsta63</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
     </div>
-
-    <h1><a href="https://github.com/bobsta63/rocketpack">rocketpack</a>
-      <span class="small">by <a href="https://github.com/bobsta63">bobsta63</a></span></h1>
-
-    <div class="description">
-      RocketPack is a simple, light-weight, easy to learn and code on PHP MVC framework that aims to help you build robust, secure and stable web applications in very little time!
-    </div>
-
-    
-      <p>I will update this page shortly!</p>
-    
-    
-      <h2>License</h2>
-      <p>GPL</p>
-    
-
-    
-      <h2>Authors</h2>
-      <p>Bobby Allen (bobbyallen.uk@gmail.com)
-<br/>      </p>
-    
-
-    
-      <h2>Contact</h2>
-      <p>Bobby Allen (bobbyallen.uk@gmail.com)
-<br/>      </p>
-    
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="https://github.com/bobsta63/rocketpack/zipball/master">zip</a> or
-      <a href="https://github.com/bobsta63/rocketpack/tarball/master">tar formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/bobsta63/rocketpack</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="https://github.com/bobsta63/rocketpack">bobsta63/rocketpack</a>
-    </div>
-
-  </div>
-
-</body>
+  </body>
 </html>
