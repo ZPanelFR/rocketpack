@@ -74,7 +74,7 @@ if (class_exists('' . $class . '')) {
         }
     }
     $raw = str_replace('?>', ']', $raw);
-    $raw = str_replace('<?', 'PHP execution is not permitted! Caught: [', $raw);
+    $raw = str_replace('<?php', 'PHP execution is not permitted! Caught: [', $raw);
     $raw = str_replace('<% else %>', '<?php } else { ?>', $raw);
     $raw = str_replace('<% end %>', '<?php } ?>', $raw);
     $raw = preg_replace('/\<% if (.+?)\ %>/i', '<?php if(\$this_object->out$1()){ ?>', $raw);
