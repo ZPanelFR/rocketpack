@@ -23,9 +23,9 @@ Once you've grabbed your copy of RocketPack you need to make a few configuration
 
 Alternative .htaccess for nginx users
 -------------------------------------
-nginx users should use the below config as a replacement for the .htaccess file:-
+nginx users should use the below config as a replacement for the top level .htaccess file:-
 
-# nginx configuration
+`# nginx configuration
 
 location = index.php {
 }
@@ -36,6 +36,10 @@ location /rocketpack/ {
   rewrite ^/rocketpack/([^/]+)/([^/]+)/([^/]+)/?$ /rocketpack/index.php?controller=$1&action=$2&id=$3 break;
   rewrite ^/rocketpack/([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ /rocketpack/index.php?controller=$1&action=$2&id=$3&otherid=$4 break;
   rewrite ^/rocketpack/([^/]+)/([^/]+)/([^/]+)/([^/]+)/(.*)?$ /rocketpack/index.php?controller=$1&action=$2&id=$3&otherid=$4$5 break;
-}
+}`
 
-# End of configuration
+A replacement for the .htaccess file in /public/ should be added like so:-
+
+`# nginx configuration
+
+autoindex off;`
