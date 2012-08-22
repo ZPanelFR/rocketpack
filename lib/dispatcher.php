@@ -128,6 +128,14 @@ function ParseInclude($raw) {
             }
         }
     }
+
+    // Set the pulic path variable, if a CDN path has been set it will use this instead of the default 'public/*' path.
+    if (app_cdnpath != '') {
+        $public_path = app_cdnpath;
+    } else {
+        $public_path = link::webfolder();
+    }
+
     $raw = str_replace('?>', ']', $raw);
     $raw = str_replace('<?', 'PHP execution is not permitted! Caught: [', $raw);
     $raw = str_replace('<% else %>', '<?php } else { ?>', $raw);
