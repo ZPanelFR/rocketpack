@@ -20,3 +20,22 @@ Once you've grabbed your copy of RocketPack you need to make a few configuration
 * If using a Linux or UNIX based operating system you should set the appropriate directory permissions on 'cache/', 'tmp/' and 'log/' to enable your web server of choice to be able to write to these directories.
 * If you now access RocketPack from your browser like so: http://localhost/rocketpack/ you should now see a summary of things you may still need to do to finalise your applications enviroment (such as configure database connection, invalid permissions sets on folder etc.).
 * You can now empty out the default (example) controllers, models and views from the app/ directory and start developing your application. You may also want to change the 'default controller' option in config.php.
+
+Alternative .htaccess for nginx users
+-------------------------------------
+nginx users should use the below config as a replacement for the .htaccess file:-
+
+# nginx configuration
+
+location = index.php {
+}
+
+location /rocketpack/ {
+  rewrite ^/rocketpack/([^/]+)/?$ /rocketpack/index.php?controller=$1 break;
+  rewrite ^/rocketpack/([^/]+)/([^/]+)/?$ /rocketpack/index.php?controller=$1&action=$2 break;
+  rewrite ^/rocketpack/([^/]+)/([^/]+)/([^/]+)/?$ /rocketpack/index.php?controller=$1&action=$2&id=$3 break;
+  rewrite ^/rocketpack/([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ /rocketpack/index.php?controller=$1&action=$2&id=$3&otherid=$4 break;
+  rewrite ^/rocketpack/([^/]+)/([^/]+)/([^/]+)/([^/]+)/(.*)?$ /rocketpack/index.php?controller=$1&action=$2&id=$3&otherid=$4$5 break;
+}
+
+# End of configuration
