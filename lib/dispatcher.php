@@ -101,7 +101,7 @@ if (class_exists('' . $class . '')) {
     header("HTTP/1.0 404 Not Found");
     if (app_defaultcontrollernotfound != '')
         director::Redirect(link::build(app_defaultcontrollernotfound));
-    echo "<h1>Sorry no controller found for '" . $_GET['controller'] . "'.</h1>";
+    echo "<h1>Sorry no controller found for '" . htmlspecialchars($_GET['controller']) . "'.</h1>";
     exit;
 }
 
